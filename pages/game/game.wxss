@@ -1,0 +1,390 @@
+/* pages/game/game.wxss */
+.game-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2d5016 0%, #1a3009 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.room-info {
+  color: white;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.pot-info {
+  background: rgba(243, 156, 18, 0.2);
+  padding: 10rpx 30rpx;
+  border-radius: 20rpx;
+}
+
+.pot-label {
+  color: #f39c12;
+  font-size: 28rpx;
+}
+
+.pot-amount {
+  color: #ffd700;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.opponents-area {
+  padding: 40rpx 30rpx;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30rpx;
+}
+
+.player {
+  position: relative;
+  text-align: center;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  transition: all 0.3s;
+}
+
+.player.active {
+  background: rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 30rpx rgba(255, 215, 0, 0.5);
+}
+
+.player-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  margin: 0 auto 10rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.player-name {
+  color: white;
+  font-size: 24rpx;
+  margin-bottom: 5rpx;
+}
+
+.player-chips {
+  color: #ffd700;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.player-action {
+  position: absolute;
+  top: -20rpx;
+  right: -20rpx;
+  background: #e74c3c;
+  color: white;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  animation: popIn 0.3s ease;
+}
+
+.player-cards {
+  display: flex;
+  gap: 8rpx;
+  justify-content: center;
+  margin-top: 15rpx;
+}
+
+.player-folded {
+  color: #e74c3c;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-top: 10rpx;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.community-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 30rpx;
+  background: rgba(0, 0, 0, 0.2);
+  margin: 30rpx;
+  border-radius: 30rpx;
+}
+
+.community-cards {
+  display: flex;
+  gap: 15rpx;
+  justify-content: center;
+  margin-bottom: 20rpx;
+}
+
+.card {
+  width: 80rpx;
+  height: 120rpx;
+  background: white;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.card.back {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10rpx,
+    rgba(255, 255, 255, 0.1) 10rpx,
+    rgba(255, 255, 255, 0.1) 20rpx
+  );
+}
+
+.card.empty {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2rpx dashed rgba(255, 255, 255, 0.3);
+}
+
+.card-rank {
+  display: block;
+}
+
+.card .spades,
+.card .clubs {
+  color: #2c3e50;
+}
+
+.card .hearts,
+.card .diamonds {
+  color: #e74c3c;
+}
+
+.stage-label {
+  color: #f39c12;
+  font-size: 28rpx;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+}
+
+.my-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  padding: 30rpx;
+  padding-bottom: 350rpx;
+}
+
+.my-cards {
+  display: flex;
+  gap: 20rpx;
+  justify-content: center;
+  margin-bottom: 20rpx;
+}
+
+.my-cards .card {
+  width: 100rpx;
+  height: 150rpx;
+  font-size: 44rpx;
+}
+
+.my-info {
+  text-align: center;
+  color: white;
+}
+
+.my-name {
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+
+.my-chips {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ffd700;
+  margin-bottom: 5rpx;
+}
+
+.my-bet {
+  font-size: 24rpx;
+  color: #f39c12;
+}
+
+.action-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 30rpx;
+  z-index: 100;
+}
+
+.bet-slider {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+  padding: 0 20rpx;
+}
+
+.bet-slider slider {
+  flex: 1;
+}
+
+.bet-amount {
+  color: #ffd700;
+  font-size: 32rpx;
+  font-weight: bold;
+  min-width: 100rpx;
+  text-align: right;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15rpx;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.action-buttons button {
+  padding: 20rpx 30rpx;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-fold {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-check {
+  background: #3498db;
+  color: white;
+}
+
+.btn-call {
+  background: #27ae60;
+  color: white;
+}
+
+.btn-raise {
+  background: #f39c12;
+  color: white;
+}
+
+.btn-allin {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: white;
+}
+
+.waiting-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 350rpx;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 32rpx;
+  z-index: 50;
+}
+
+.result-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.result-content {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 30rpx;
+  padding: 60rpx;
+  text-align: center;
+  width: 80%;
+  max-width: 600rpx;
+  border: 2rpx solid rgba(255, 215, 0, 0.3);
+}
+
+.result-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ffd700;
+  margin-bottom: 30rpx;
+}
+
+.result-hand {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20rpx;
+  border-radius: 15rpx;
+  margin-bottom: 30rpx;
+}
+
+.result-hand text {
+  color: #f39c12;
+  font-size: 32rpx;
+}
+
+.result-amount {
+  font-size: 56rpx;
+  font-weight: bold;
+  color: #27ae60;
+  margin-bottom: 40rpx;
+}
+
+.btn-next,
+.btn-exit {
+  width: 100%;
+  padding: 25rpx;
+  margin-bottom: 20rpx;
+  border-radius: 15rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-next {
+  background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+  color: white;
+}
+
+.btn-exit {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}

@@ -1,0 +1,108 @@
+<!--pages/game/game.wxml-->
+<view class="game-container">
+  <!-- 顶部信息栏 -->
+  <view class="top-bar">
+    <view class="room-info">
+      <text wx:if="{{roomId}}">房间：{{roomId}}</text>
+      <text wx:else>人机对战</text>
+    </view>
+    <view class="pot-info">
+      <text class="pot-label">底池：</text>
+      <text class="pot-amount">{{pot}}</text>
+    </view>
+  </view>
+
+  <!-- 对手区域 -->
+  <view class="opponents-area">
+    <view 
+      class="player {{player.isBot ? 'bot' : ''}} {{playerIndex === currentPlayerIndex ? 'active' : ''}}"
+      wx:for="{{players}}"
+      wx:key="id"
+      wx:if="{{playerIndex !== myIndex}}"
+    >
+      <view class="player-avatar">
+        <text>{{player.isBot ? '🤖' : '👤'}}</text>
+      </view>
+      <view class="player-name">{{player.name}}</view>
+      <view class="player-chips">💰 {{player.chips}}</view>
+      <view class="player-action" wx:if="{{player.lastAction}}">{{player.lastAction}}</view>
+      <view class="player-cards cards-hidden" wx:if="{{!player.isFolded}}">
+        <view class="card back"></view>
+        <view class="card back"></view>
+      </view>
+      <view class="player-folded" wx:if="{{player.isFolded}}">弃牌</view>
+    </view>
+  </view>
+
+  <!-- 公共牌区域 -->
+  <view class="community-area">
+    <view class="community-cards">
+      <view 
+        class="card {{card ? '' : 'empty'}}"
+        wx:for="{{communityCards}}"
+        wx:key="index"
+        wx:for-item="card"
+      >
+        <text wx:if="{{card}}" class="card-rank {{getSuitClass(card.suit)}}">{{card.rank}}{{card.suit}}</text>
+      </view>
+      <view class="card empty" wx:if="{{communityCards.length < 5}}"></view>
+      <view class="card empty" wx:if="{{communityCards.length < 4}}"></view>
+      <view class="card empty" wx:if="{{communityCards.length < 3}}"></view>
+    </view>
+    <view class="stage-label">{{stageText}}</view>
+  </view>
+
+  <!-- 我的手牌区域 -->
+  <view class="my-area">
+    <view class="my-cards">
+      <view class="card {{getSuitClass(card.suit)}}" wx:for="{{myHand}}" wx:key="index">
+        <text class="card-rank">{{card.rank}}{{card.suit}}</text>
+      </view>
+    </view>
+    <view class="my-info">
+      <view class="my-name">{{myName}}</view>
+      <view class="my-chips">💰 {{myChips}}</view>
+      <view class="my-bet" wx:if="{{myCurrentBet > 0}}">已下注：{{myCurrentBet}}</view>
+    </view>
+  </view>
+
+  <!-- 操作按钮区域 -->
+  <view class="action-area" wx:if="{{isMyTurn && gameStage < 5}}">
+    <view class="bet-slider">
+      <slider 
+        min="{{minBet}}"
+        max="{{maxBet}}"
+        value="{{betAmount}}"
+        block-size="24"
+        activeColor="#f39c12"
+        bindchange="onBetChange"
+      />
+      <text class="bet-amount">{{betAmount}}</text>
+    </view>
+    <view class="action-buttons">
+      <button class="btn-fold" bindtap="fold">弃牌</button>
+      <button class="btn-check" bindtap="check" wx:if="{{canCheck}}">过牌</button>
+      <button class="btn-call" bindtap="call" wx:if="{{!canCheck}}">跟注 {{toCall}}</button>
+      <button class="btn-raise" bindtap="raise">加注</button>
+      <button class="btn-allin" bindtap="allIn">全下</button>
+    </view>
+  </view>
+
+  <!-- 等待提示 -->
+  <view class="waiting-mask" wx:if="{{!isMyTurn && gameStage < 6}}">
+    <text>等待其他玩家操作...</text>
+  </view>
+
+  <!-- 结算弹窗 -->
+  <view class="result-modal" wx:if="{{showResult}}">
+    <view class="result-content">
+      <view class="result-title">{{winnerText}}</view>
+      <view class="result-hand" wx:if="{{winnerHand}}">
+        <text>牌型：{{winnerHand.typeName}}</text>
+      </view>
+      <view class="result-amount">+{{winAmount}}</view>
+      <button class="btn-next" bindtap="nextGame">下一局</button>
+      <button class="btn-exit" bindtap="exitGame">退出</button>
+    </view>
+  </view>
+</view>

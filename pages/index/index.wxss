@@ -1,0 +1,168 @@
+/* pages/index/index.wxss */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 40rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60rpx;
+}
+
+.title {
+  font-size: 64rpx;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 0 0 20rpx rgba(255, 215, 0, 0.5);
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #8892b0;
+  margin-top: 10rpx;
+}
+
+.coins-panel {
+  background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+  border-radius: 30rpx;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60rpx;
+  box-shadow: 0 10rpx 30rpx rgba(243, 156, 18, 0.3);
+}
+
+.coins-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+}
+
+.coins-amount {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: white;
+}
+
+.coins-label {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: 10rpx;
+}
+
+.game-modes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30rpx;
+  margin-bottom: 60rpx;
+}
+
+.mode-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 24rpx;
+  padding: 40rpx 20rpx;
+  text-align: center;
+  backdrop-filter: blur(10rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s;
+}
+
+.mode-card:active {
+  transform: scale(0.95);
+}
+
+.mode-icon {
+  font-size: 64rpx;
+  margin-bottom: 20rpx;
+}
+
+.mode-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10rpx;
+}
+
+.mode-desc {
+  font-size: 24rpx;
+  color: #8892b0;
+}
+
+.footer {
+  text-align: center;
+  color: #8892b0;
+  font-size: 24rpx;
+}
+
+.version {
+  color: #5a6a8a;
+}
+
+/* 弹窗样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 30rpx;
+  padding: 50rpx;
+  width: 80%;
+  max-width: 600rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.room-input {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15rpx;
+  padding: 25rpx 30rpx;
+  font-size: 32rpx;
+  color: white;
+  text-align: center;
+  letter-spacing: 10rpx;
+  margin-bottom: 40rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-cancel,
+.btn-confirm {
+  flex: 1;
+  padding: 25rpx;
+  border-radius: 15rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.btn-cancel {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.btn-confirm {
+  background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+  color: white;
+}

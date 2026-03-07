@@ -1,0 +1,68 @@
+<!--pages/room/room.wxml-->
+<view class="room-container">
+  <!-- 房间信息 -->
+  <view class="room-header">
+    <view class="room-id">
+      <text class="room-label">房间号</text>
+      <text class="room-number">{{roomId}}</text>
+    </view>
+    <view class="room-status">
+      <text wx:if="{{gameStarted}}">游戏中</text>
+      <text wx:else>等待中</text>
+    </view>
+  </view>
+
+  <!-- 玩家列表 -->
+  <view class="players-section">
+    <view class="section-title">玩家列表 ({{players.length}}/6)</view>
+    
+    <view class="player-list">
+      <view class="player-item" wx:for="{{players}}" wx:key="id">
+        <view class="player-avatar">
+          <text>{{player.isBot ? '🤖' : '👤'}}</text>
+        </view>
+        <view class="player-info">
+          <view class="player-name">{{player.name}}</view>
+          <view class="player-coins">💰 {{player.coins}}</view>
+        </view>
+        <view class="player-role" wx:if="{{player.isHost}}">
+          <text class="host-tag">房主</text>
+        </view>
+        <view class="player-ready" wx:if="{{player.ready}}">
+          <text class="ready-tag">已准备</text>
+        </view>
+      </view>
+
+      <!-- 空位 -->
+      <view class="empty-slot" wx:for="{{emptySlots}}" wx:key="index">
+        <text class="empty-text">空位</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-section">
+    <button 
+      class="btn-start" 
+      bindtap="startGame"
+      disabled="{{!canStart}}"
+    >
+      开始游戏
+    </button>
+    
+    <button class="btn-invite" bindtap="inviteFriends">
+      邀请好友
+    </button>
+
+    <button class="btn-leave" bindtap="leaveRoom">
+      离开房间
+    </button>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tips-section">
+    <view class="tip-item">💡 点击"邀请好友"生成房间二维码</view>
+    <view class="tip-item">💡 至少 2 人才能开始游戏</view>
+    <view class="tip-item">💡 好友扫码即可加入房间</view>
+  </view>
+</view>

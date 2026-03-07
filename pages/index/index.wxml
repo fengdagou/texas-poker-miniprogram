@@ -1,0 +1,69 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <!-- 标题 -->
+  <view class="header">
+    <view class="title">🃏 德州扑克</view>
+    <view class="subtitle">Texas Hold'em</view>
+  </view>
+
+  <!-- 金币显示 -->
+  <view class="coins-panel">
+    <view class="coins-icon">💰</view>
+    <view class="coins-amount">{{coins}}</view>
+    <view class="coins-label">金币</view>
+  </view>
+
+  <!-- 游戏模式选择 -->
+  <view class="game-modes">
+    <!-- 人机对战 -->
+    <view class="mode-card" bindtap="startVsBot">
+      <view class="mode-icon">🤖</view>
+      <view class="mode-title">人机对战</view>
+      <view class="mode-desc">单人练习，提升牌技</view>
+    </view>
+
+    <!-- 好友对战 -->
+    <view class="mode-card" bindtap="createRoom">
+      <view class="mode-icon">👥</view>
+      <view class="mode-title">好友对战</view>
+      <view class="mode-desc">创建房间，邀请好友</view>
+    </view>
+
+    <!-- 加入房间 -->
+    <view class="mode-card" bindtap="joinRoom">
+      <view class="mode-icon">🚪</view>
+      <view class="mode-title">加入房间</view>
+      <view class="mode-desc">输入房间号加入</view>
+    </view>
+
+    <!-- 游戏规则 -->
+    <view class="mode-card" bindtap="showRules">
+      <view class="mode-icon">📖</view>
+      <view class="mode-title">游戏规则</view>
+      <view class="mode-desc">新手入门指南</view>
+    </view>
+  </view>
+
+  <!-- 底部信息 -->
+  <view class="footer">
+    <view class="version">v1.0.0</view>
+  </view>
+</view>
+
+<!-- 加入房间弹窗 -->
+<view class="modal" wx:if="{{showJoinModal}}">
+  <view class="modal-content">
+    <view class="modal-title">加入房间</view>
+    <input 
+      class="room-input" 
+      placeholder="请输入 6 位房间号" 
+      maxlength="6"
+      value="{{roomIdInput}}"
+      bindinput="onRoomIdInput"
+    />
+    <view class="modal-buttons">
+      <button class="btn-cancel" bindtap="cancelJoin">取消</button>
+      <button class="btn-confirm" bindtap="confirmJoin">加入</button>
+    </view>
+  </view>
+</view>
