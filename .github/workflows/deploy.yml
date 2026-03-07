@@ -1,0 +1,59 @@
+name: Deploy to WeChat Mini Program
+
+on:
+  push:
+    branches: [ master, main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install WeChat CLI
+      run: npm install -g miniprogram-ci
+      
+    - name: Prepare private key
+      run: |
+        mkdir -p ~/.wechat-miniprogram
+        echo "${{ secrets.WECHAT_PRIVATE_KEY }}" > ~/.wechat-miniprogram/private.key
+        chmod 600 ~/.wechat-miniprogram/private.key
+        
+    - name: Get version from project.config.json
+      id: version
+      run: |
+        VERSION=$(grep -o '"version": "[^"]*"' project.config.json | cut -d'"' -f4)
+        if [ -z "$VERSION" ]; then
+          VERSION="1.0.0"
+        fi
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "Version: $VERSION"
+        
+    - name: Upload to WeChat
+      run: |
+        cd ${{ github.workspace }}
+        
+        # 使用微信 CLI 上传
+        npx miniprogram-ci upload \
+          --project-path . \
+          --private-key ~/.wechat-miniprogram/private.key \
+          --appid ${{ secrets.WECHAT_APPID }} \
+          --desc "自动部署：${{ github.event.head_commit.message }}" \
+          --version "${{ steps.version.outputs.version }}" \
+          --upload-output-file ./upload-result.json || true
+          
+    - name: Show result
+      run: |
+        echo "✅ 部署完成！"
+        echo "📦 版本：${{ steps.version.outputs.version }}"
+        echo "📝 提交信息：${{ github.event.head_commit.message }}"
+        if [ -f ./upload-result.json ]; then
+          cat ./upload-result.json
+        fi
