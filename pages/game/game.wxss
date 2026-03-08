@@ -81,6 +81,18 @@
   color: #ffd700;
   font-size: 28rpx;
   font-weight: bold;
+  margin-bottom: 5rpx;
+}
+
+.player-bet {
+  color: #f39c12;
+  font-size: 24rpx;
+  font-weight: bold;
+  background: rgba(243, 156, 18, 0.2);
+  padding: 5rpx 15rpx;
+  border-radius: 15rpx;
+  display: inline-block;
+  margin-bottom: 5rpx;
 }
 
 .player-action {

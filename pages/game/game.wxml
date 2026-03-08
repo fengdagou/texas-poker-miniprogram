@@ -19,12 +19,15 @@
       wx:for="{{players}}"
       wx:key="id"
       wx:if="{{playerIndex !== myIndex}}"
+      wx:for-item="player"
+      wx:for-index="playerIndex"
     >
       <view class="player-avatar">
         <text>{{player.isBot ? '🤖' : '👤'}}</text>
       </view>
       <view class="player-name">{{player.name}}</view>
       <view class="player-chips">💰 {{player.chips}}</view>
+      <view class="player-bet" wx:if="{{player.currentBet > 0}}">下注：{{player.currentBet}}</view>
       <view class="player-action" wx:if="{{player.lastAction}}">{{player.lastAction}}</view>
       <view class="player-cards cards-hidden" wx:if="{{!player.isFolded}}">
         <view class="card back"></view>

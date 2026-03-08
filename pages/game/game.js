@@ -167,6 +167,7 @@ Page({
       betAmount: Math.min(minBet * 2, maxBet)
     })
     
+    console.log('玩家下注信息:', state.players.map(p => ({ name: p.name, currentBet: p.currentBet, lastAction: p.lastAction })))
     console.log('界面已更新，myHand:', this.data.myHand)
 
     // 检查游戏是否结束
