@@ -1,42 +1,80 @@
-/* 排行榜页面样式 */
+/* 排行榜页面样式 - 古典风格 */
 
 .leaderboard-container {
-  padding: 20rpx;
+  padding: 25rpx;
   min-height: 100vh;
-  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      rgba(139, 69, 19, 0.08) 0px,
+      rgba(139, 69, 19, 0.08) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(180deg, #2c1810 0%, #1a0f0a 100%);
+  position: relative;
+}
+
+.leaderboard-container::before {
+  content: '';
+  position: fixed;
+  top: 15rpx;
+  left: 15rpx;
+  right: 15rpx;
+  bottom: 15rpx;
+  border: 3rpx solid rgba(212, 175, 55, 0.25);
+  border-radius: 25rpx;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .header {
   text-align: center;
   margin-bottom: 40rpx;
+  position: relative;
+  z-index: 5;
 }
 
 .title {
-  font-size: 40rpx;
+  font-size: 48rpx;
   font-weight: bold;
   color: #ffd700;
-  margin-bottom: 30rpx;
+  margin-bottom: 35rpx;
+  text-shadow: 0 4rpx 20rpx rgba(255, 215, 0, 0.5);
+  font-family: 'Georgia', serif;
+  letter-spacing: 8rpx;
 }
 
 .tabs {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 20rpx;
+  gap: 25rpx;
 }
 
 .tab {
-  padding: 15rpx 40rpx;
-  border-radius: 30rpx;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  font-size: 28rpx;
+  padding: 18rpx 45rpx;
+  border-radius: 35rpx;
+  background: linear-gradient(135deg, rgba(62, 39, 25, 0.7) 0%, rgba(44, 24, 16, 0.85) 100%);
+  color: #d4af37;
+  font-size: 30rpx;
+  border: 2rpx solid rgba(212, 175, 55, 0.25);
+  box-shadow: 
+    0 4rpx 15rpx rgba(0, 0, 0, 0.4),
+    inset 0 2rpx 10rpx rgba(212, 175, 55, 0.08);
+  transition: all 0.3s ease;
+  font-family: 'Georgia', serif;
+  font-weight: bold;
 }
 
 .tab.active {
-  background: #ffd700;
-  color: #1a1a2e;
-  font-weight: bold;
+  background: linear-gradient(135deg, #d4af37 0%, #b89628 100%);
+  color: #2c1810;
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 
+    0 6rpx 20rpx rgba(212, 175, 55, 0.4),
+    inset 0 2rpx 10rpx rgba(255, 255, 255, 0.3);
+  transform: translateY(-3rpx);
 }
 
 /* 我的排名 */
@@ -44,39 +82,53 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 30rpx;
-  border-radius: 20rpx;
-  margin-bottom: 30rpx;
-  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(62, 39, 25, 0.8) 0%, rgba(44, 24, 16, 0.9) 100%);
+  padding: 35rpx;
+  border-radius: 25rpx;
+  margin-bottom: 35rpx;
+  border: 3rpx solid rgba(212, 175, 55, 0.4);
+  box-shadow: 
+    0 10rpx 35rpx rgba(0, 0, 0, 0.5),
+    inset 0 2rpx 15rpx rgba(212, 175, 55, 0.1);
+  position: relative;
+  z-index: 5;
 }
 
 .rank-number {
-  width: 60rpx;
-  height: 60rpx;
+  width: 70rpx;
+  height: 70rpx;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(62, 39, 25, 0.8) 0%, rgba(44, 24, 16, 0.9) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32rpx;
+  font-size: 36rpx;
   font-weight: bold;
-  color: #fff;
-  margin-right: 20rpx;
+  color: #d4af37;
+  margin-right: 25rpx;
+  border: 3rpx solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.4);
+  font-family: 'Georgia', serif;
 }
 
 .rank-number.top {
-  background: #ffd700;
-  color: #1a1a2e;
+  background: linear-gradient(135deg, #d4af37 0%, #b89628 100%);
+  color: #2c1810;
+  border-color: #ffd700;
+  box-shadow: 
+    0 4rpx 20rpx rgba(212, 175, 55, 0.5),
+    0 0 30rpx rgba(255, 215, 0, 0.3);
 }
 
 .rank-avatar {
-  width: 80rpx;
-  height: 80rpx;
+  width: 90rpx;
+  height: 90rpx;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 20rpx;
-  border: 3rpx solid #fff;
+  margin-right: 25rpx;
+  border: 4rpx solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #8b4513 0%, #5c3317 100%);
 }
 
 .rank-avatar image {
@@ -89,56 +141,92 @@
 }
 
 .rank-name {
-  font-size: 32rpx;
-  color: #fff;
+  font-size: 34rpx;
+  color: #ffd700;
   font-weight: bold;
-  margin-bottom: 10rpx;
+  margin-bottom: 12rpx;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.5);
+  font-family: 'Georgia', serif;
 }
 
 .rank-score {
-  font-size: 26rpx;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 28rpx;
+  color: #f0c850;
+  opacity: 0.9;
 }
 
 .rank-trend {
-  font-size: 32rpx;
+  font-size: 36rpx;
 }
 
 .rank-trend.up {
-  color: #4ade80;
+  color: #27ae60;
+  text-shadow: 0 2rpx 10rpx rgba(39, 174, 96, 0.4);
 }
 
 .rank-trend.down {
-  color: #f87171;
+  color: #c0392b;
+  text-shadow: 0 2rpx 10rpx rgba(192, 57, 43, 0.4);
 }
 
 .rank-trend.same {
-  color: #9ca3af;
+  color: #6b5345;
 }
 
 /* 排行榜列表 */
 .rank-list {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20rpx;
-  padding: 20rpx;
+  background: linear-gradient(135deg, rgba(62, 39, 25, 0.6) 0%, rgba(44, 24, 16, 0.8) 100%);
+  border-radius: 25rpx;
+  padding: 25rpx;
+  border: 2rpx solid rgba(212, 175, 55, 0.25);
+  box-shadow: 
+    0 8rpx 30rpx rgba(0, 0, 0, 0.4),
+    inset 0 2rpx 15rpx rgba(212, 175, 55, 0.08);
+  position: relative;
+  z-index: 5;
 }
 
 .rank-item {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 25rpx 20rpx;
-  border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
+  padding: 28rpx 25rpx;
+  border-bottom: 2rpx solid rgba(212, 175, 55, 0.15);
 }
 
 .rank-item:last-child {
   border-bottom: none;
 }
 
+/* 前三名特殊样式 */
+.rank-item:nth-child(1) .rank-number {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);
+  color: #2c1810;
+  border-color: #fff;
+  box-shadow: 
+    0 4rpx 20rpx rgba(255, 215, 0, 0.6),
+    0 0 30rpx rgba(255, 215, 0, 0.4);
+}
+
+.rank-item:nth-child(2) .rank-number {
+  background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
+  color: #2c1810;
+  border-color: #e0e0e0;
+  box-shadow: 0 4rpx 20rpx rgba(192, 192, 192, 0.5);
+}
+
+.rank-item:nth-child(3) .rank-number {
+  background: linear-gradient(135deg, #cd7f32 0%, #b87333 100%);
+  color: #fff;
+  border-color: #e09050;
+  box-shadow: 0 4rpx 20rpx rgba(205, 127, 50, 0.5);
+}
+
 /* 空状态 */
 .empty {
   text-align: center;
-  padding: 100rpx 0;
-  color: rgba(255, 255, 255, 0.5);
+  padding: 120rpx 0;
+  color: #6b5345;
   font-size: 32rpx;
+  opacity: 0.7;
 }

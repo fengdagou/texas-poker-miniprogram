@@ -7,10 +7,10 @@
   ],
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#1a1a2e",
-    "navigationBarTitleText": "德州扑克",
+    "navigationBarBackgroundColor": "#2c1810",
+    "navigationBarTitleText": "古典德州扑克",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#16213e"
+    "backgroundColor": "#1a0f0a"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
