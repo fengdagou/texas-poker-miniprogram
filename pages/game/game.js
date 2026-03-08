@@ -256,15 +256,26 @@ Page({
   },
 
   showResult(winner) {
-    const isMyWin = winner.players.some(p => p.id === wx.getStorageSync('userId'))
+    const myId = wx.getStorageSync('userId') || 'user_001'
+    const isMyWin = winner.players.some(p => p.id === myId)
     
-    console.log('游戏结束，获胜者:', winner)
+    // 获取所有玩家的手牌（摊牌阶段可以看到所有人的牌）
+    const state = this.data.game.getState(myId)
+    const allPlayers = state.players.map(p => ({
+      id: p.id,
+      name: p.name,
+      hand: p.hand || [],
+      isFolded: p.isFolded
+    }))
+    
+    console.log('游戏结束，所有玩家手牌:', allPlayers)
     
     this.setData({
       showResult: true,
       winnerText: isMyWin ? '🎉 你赢了！' : '😔 你输了',
       winnerHand: winner.hand ? { typeName: HAND_NAMES[winner.hand.type] } : null,
-      winAmount: isMyWin ? winner.amount : 0
+      winAmount: isMyWin ? winner.amount : 0,
+      allPlayers: allPlayers
     })
   },
 

@@ -445,7 +445,71 @@
   font-size: 56rpx;
   font-weight: bold;
   color: #27ae60;
-  margin-bottom: 40rpx;
+  margin-bottom: 30rpx;
+}
+
+/* 所有玩家手牌 */
+.all-hands-title {
+  font-size: 28rpx;
+  color: #f39c12;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.all-hands-list {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20rpx;
+  border-radius: 15rpx;
+  margin-bottom: 30rpx;
+  max-height: 400rpx;
+  overflow-y: auto;
+}
+
+.player-hand-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15rpx;
+  margin-bottom: 15rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15rpx;
+}
+
+.player-hand-item:last-child {
+  margin-bottom: 0;
+}
+
+.player-hand-name {
+  font-size: 26rpx;
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.player-hand-cards {
+  display: flex;
+  gap: 10rpx;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.player-hand-cards .card {
+  width: 60rpx;
+  height: 90rpx;
+  font-size: 32rpx;
+}
+
+.no-hand {
+  color: #95a5a6;
+  font-size: 24rpx;
+}
+
+.player-hand-fold {
+  font-size: 22rpx;
+  color: #e74c3c;
+  margin-top: 8rpx;
 }
 
 .btn-next,
@@ -459,8 +523,27 @@
   border: none;
 }
 
+.result-buttons {
+  display: flex;
+  gap: 15rpx;
+}
+
+.result-buttons button {
+  flex: 1;
+  padding: 20rpx;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border: none;
+}
+
 .btn-next {
   background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+  color: white;
+}
+
+.btn-next {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
   color: white;
 }
 
