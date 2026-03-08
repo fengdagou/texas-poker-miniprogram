@@ -208,42 +208,44 @@
   left: 0;
   right: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-  padding: 30rpx;
-  padding-bottom: 350rpx;
+  padding: 20rpx;
+  padding-bottom: 280rpx;
+  z-index: 50;
 }
 
 .my-cards {
   display: flex;
-  gap: 20rpx;
+  gap: 15rpx;
   justify-content: center;
-  margin-bottom: 20rpx;
+  margin-bottom: 15rpx;
 }
 
 .my-cards .card {
-  width: 100rpx;
-  height: 150rpx;
-  font-size: 44rpx;
+  width: 80rpx;
+  height: 120rpx;
+  font-size: 40rpx;
 }
 
 .my-info {
   text-align: center;
   color: white;
-}
-
-.my-name {
-  font-size: 28rpx;
   margin-bottom: 10rpx;
 }
 
+.my-name {
+  font-size: 24rpx;
+  margin-bottom: 8rpx;
+}
+
 .my-chips {
-  font-size: 36rpx;
+  font-size: 32rpx;
   font-weight: bold;
   color: #ffd700;
   margin-bottom: 5rpx;
 }
 
 .my-bet {
-  font-size: 24rpx;
+  font-size: 22rpx;
   color: #f39c12;
 }
 
@@ -252,44 +254,48 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.9);
-  padding: 30rpx;
+  background: rgba(0, 0, 0, 0.95);
+  padding: 15rpx;
+  padding-bottom: 20rpx;
   z-index: 100;
+  max-height: 260rpx;
 }
 
 .bet-slider {
   display: flex;
   align-items: center;
-  gap: 20rpx;
-  margin-bottom: 30rpx;
-  padding: 0 20rpx;
+  gap: 15rpx;
+  margin-bottom: 15rpx;
+  padding: 0 15rpx;
 }
 
 .bet-slider slider {
   flex: 1;
+  height: 40rpx;
 }
 
 .bet-amount {
   color: #ffd700;
-  font-size: 32rpx;
+  font-size: 28rpx;
   font-weight: bold;
-  min-width: 100rpx;
+  min-width: 80rpx;
   text-align: right;
 }
 
 .action-buttons {
   display: flex;
-  gap: 15rpx;
+  gap: 10rpx;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .action-buttons button {
-  padding: 20rpx 30rpx;
-  border-radius: 15rpx;
-  font-size: 28rpx;
+  padding: 15rpx 20rpx;
+  border-radius: 12rpx;
+  font-size: 24rpx;
   font-weight: bold;
   border: none;
+  min-width: 120rpx;
 }
 
 .btn-fold {
