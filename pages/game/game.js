@@ -116,17 +116,23 @@ Page({
     const game = this.data.game
     const myId = wx.getStorageSync('userId') || 'user_001'
     
+    console.log('=== 开始更新游戏状态 ===')
+    console.log('我的 ID:', myId)
+    console.log('我的索引:', this.data.myIndex)
+    console.log('玩家总数:', game.players.length)
+    
     // 获取游戏状态（传入我的 ID，让我能看到自己的手牌）
     const state = game.getState(myId)
+    
+    console.log('状态中的玩家数:', state.players.length)
+    console.log('状态中的所有玩家:', state.players.map(p => ({ id: p.id, name: p.name, hand: p.hand })))
+    
     const myPlayer = state.players[this.data.myIndex]
-
-    console.log('=== 游戏状态更新 ===')
-    console.log('阶段:', state.stage, STAGE_TEXTS[state.stage])
-    console.log('底池:', state.pot)
-    console.log('公共牌:', state.communityCards)
-    console.log('我的手牌:', myPlayer.hand, '数量:', myPlayer.hand ? myPlayer.hand.length : 0)
-    console.log('我的筹码:', myPlayer.chips)
-    console.log('玩家列表:', state.players.map(p => ({ name: p.name, chips: p.chips, hand: p.hand })))
+    
+    console.log('我的玩家对象:', myPlayer)
+    console.log('我的手牌:', myPlayer ? myPlayer.hand : 'myPlayer 是 undefined')
+    console.log('我的手牌数量:', myPlayer && myPlayer.hand ? myPlayer.hand.length : 0)
+    console.log('我的手牌详情:', JSON.stringify(myPlayer ? myPlayer.hand : null))
 
     const currentPlayerIndex = state.currentPlayerIndex
     const isMyTurn = currentPlayerIndex === this.data.myIndex && state.stage < GAME_STAGE.SHOWDOWN
