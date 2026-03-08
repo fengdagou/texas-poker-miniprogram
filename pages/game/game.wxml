@@ -115,8 +115,21 @@
       </view>
       <view class="result-amount">+{{winAmount}}</view>
       
-      <!-- 显示所有玩家手牌 -->
-      <view class="all-hands-title">📋 本局手牌</view>
+      <!-- 公共牌 -->
+      <view class="community-cards-result">
+        <view class="community-title">🎴 公共牌</view>
+        <view class="community-list">
+          <view class="card {{getSuitClass(card.suit)}}" wx:for="{{communityCards}}" wx:key="*this" wx:for-item="card">
+            <text class="card-rank">{{card.rank}}{{card.suit}}</text>
+          </view>
+          <view class="card empty" wx:if="{{communityCards.length < 5}}"></view>
+          <view class="card empty" wx:if="{{communityCards.length < 4}}"></view>
+          <view class="card empty" wx:if="{{communityCards.length < 3}}"></view>
+        </view>
+      </view>
+      
+      <!-- 所有玩家手牌 -->
+      <view class="all-hands-title">📋 玩家手牌</view>
       <view class="all-hands-list">
         <view class="player-hand-item" wx:for="{{allPlayers}}" wx:key="id" wx:for-item="player">
           <view class="player-hand-name">{{player.name}}</view>
