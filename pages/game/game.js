@@ -126,13 +126,22 @@ Page({
     const minBet = state.minRaise
     const maxBet = myPlayer.chips
 
+    // 调试信息
+    console.log('游戏状态更新:', {
+      stage: state.stage,
+      stageText: STAGE_TEXTS[state.stage],
+      pot: state.pot,
+      communityCards: state.communityCards,
+      myHand: myPlayer.hand
+    })
+
     this.setData({
       gameStage: state.stage,
       stageText: STAGE_TEXTS[state.stage],
       pot: state.pot,
-      communityCards: state.communityCards,
+      communityCards: state.communityCards || [],
       players: state.players,
-      myHand: myPlayer.hand,
+      myHand: myPlayer.hand || [],
       myChips: myPlayer.chips,
       myCurrentBet: myPlayer.currentBet,
       isMyTurn,
