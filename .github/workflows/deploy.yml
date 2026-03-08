@@ -23,7 +23,7 @@ jobs:
     - name: Prepare private key
       run: |
         mkdir -p ~/.wechat-miniprogram
-        echo "${{ secrets.WECHAT_PRIVATE_KEY }}" > ~/.wechat-miniprogram/private.key
+        echo "${{ secrets.WECHAT_PRIVATE_KEY }}" | base64 -d > ~/.wechat-miniprogram/private.key
         chmod 600 ~/.wechat-miniprogram/private.key
         
     - name: Get version from project.config.json
