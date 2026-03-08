@@ -267,7 +267,11 @@ Page({
   // 获取花色样式类
   getSuitClass(suit) {
     if (!suit) return ''
-    if (suit === '♥' || suit === '♦') return 'red'
-    return 'black'
+    // 返回具体的花色类名，用于 CSS 着色
+    if (suit === '♥') return 'hearts'
+    if (suit === '♦') return 'diamonds'
+    if (suit === '♠') return 'spades'
+    if (suit === '♣') return 'clubs'
+    return ''
   }
 })
