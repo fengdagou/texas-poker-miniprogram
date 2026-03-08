@@ -45,31 +45,37 @@ class SoundManager {
   }
 
   init() {
-    // 创建背景音乐
-    this.bgm = wx.createInnerAudioContext()
-    this.bgm.src = SOUND_CONFIG.bgm.url
-    this.bgm.loop = SOUND_CONFIG.bgm.loop
-    this.bgm.volume = SOUND_CONFIG.bgm.volume
-    this.bgm.autoplay = false
+    try {
+      // 创建背景音乐
+      this.bgm = wx.createInnerAudioContext()
+      this.bgm.src = SOUND_CONFIG.bgm.url
+      this.bgm.loop = SOUND_CONFIG.bgm.loop
+      this.bgm.volume = SOUND_CONFIG.bgm.volume
+      this.bgm.autoplay = false
 
-    // 创建音效
-    for (let key in SOUND_CONFIG) {
-      if (key !== 'bgm') {
-        this.sounds[key] = wx.createInnerAudioContext()
-        this.sounds[key].src = SOUND_CONFIG[key].url
-        this.sounds[key].volume = SOUND_CONFIG[key].volume
+      // 创建音效
+      for (let key in SOUND_CONFIG) {
+        if (key !== 'bgm') {
+          this.sounds[key] = wx.createInnerAudioContext()
+          this.sounds[key].src = SOUND_CONFIG[key].url
+          this.sounds[key].volume = SOUND_CONFIG[key].volume
+        }
       }
-    }
 
-    // 错误处理
-    this.bgm.onError((res) => {
-      console.log('BGM 播放失败', res)
-    })
-
-    for (let key in this.sounds) {
-      this.sounds[key].onError((res) => {
-        console.log(`音效${key}播放失败`, res)
+      // 错误处理
+      this.bgm.onError((res) => {
+        // 静音模式，不显示错误
       })
+
+      for (let key in this.sounds) {
+        this.sounds[key].onError((res) => {
+          // 音效文件不存在时自动静音
+          console.log(`音效${key}未加载，已自动静音`)
+        })
+      }
+    } catch (e) {
+      console.log('音效系统初始化失败，已禁用:', e)
+      this.muted = true
     }
   }
 

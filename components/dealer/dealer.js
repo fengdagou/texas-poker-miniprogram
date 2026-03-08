@@ -2,11 +2,11 @@
  * 美女荷官组件逻辑
  */
 
-// 荷官皮肤列表（需要替换为实际图片路径）
+// 荷官皮肤列表
 const DEALER_SKINS = [
-  '/images/dealer/dealer1.png',
-  '/images/dealer/dealer2.png',
-  '/images/dealer/dealer3.png'
+  '/images/dealer/dealer1.svg',
+  '/images/dealer/dealer2.svg',
+  '/images/dealer/dealer3.svg'
 ]
 
 // 荷官语音提示
