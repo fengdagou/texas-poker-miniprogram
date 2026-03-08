@@ -36,7 +36,9 @@ Page({
     showResult: false,
     winnerText: '',
     winnerHand: null,
-    winAmount: 0
+    winAmount: 0,
+    allPlayers: [],
+    communityCards: []
   },
 
   onLoad(options) {
@@ -144,9 +146,9 @@ Page({
 
     // 更新界面
     this.setData({
-      gameStage: state.stage,
-      stageText: STAGE_TEXTS[state.stage],
-      pot: state.pot,
+      gameStage: state.stage || 0,
+      stageText: STAGE_TEXTS[state.stage] || '等待开始',
+      pot: state.pot || 0,
       communityCards: state.communityCards || [],
       players: state.players.map(p => ({
         name: p.name || '未知玩家',
@@ -161,10 +163,10 @@ Page({
       myCurrentBet: myPlayer.currentBet || 0,
       isMyTurn,
       canCheck,
-      toCall,
-      minBet,
-      maxBet,
-      betAmount: Math.min(minBet * 2, maxBet)
+      toCall: toCall || 0,
+      minBet: minBet || 20,
+      maxBet: maxBet || 100,
+      betAmount: Math.min(minBet * 2, maxBet) || 20
     })
     
     console.log('玩家下注信息:', state.players.map(p => ({ name: p.name, currentBet: p.currentBet, lastAction: p.lastAction })))

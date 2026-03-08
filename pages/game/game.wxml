@@ -8,10 +8,10 @@
     </view>
     <view class="pot-info">
       <text class="pot-label">底池：</text>
-      <text class="pot-amount">{{pot}}</text>
+      <text class="pot-amount">{{pot || 0}}</text>
     </view>
     <view class="my-status">
-      <text class="my-chips-top">💰 {{myChips}}</text>
+      <text class="my-chips-top">💰 {{myChips || 0}}</text>
       <text wx:if="{{myCurrentBet > 0}}" class="my-bet-top">已下注：{{myCurrentBet}}</text>
     </view>
   </view>
@@ -30,7 +30,7 @@
         <text>{{player.isBot ? '🤖' : '👤'}}</text>
       </view>
       <view class="player-name">{{player.name}}</view>
-      <view class="player-chips">💰 {{player.chips}}</view>
+      <view class="player-chips">💰 {{player.chips || 0}}</view>
       <view class="player-bet" wx:if="{{player.currentBet > 0}}">下注：{{player.currentBet}}</view>
       <view class="player-action" wx:if="{{player.lastAction}}">{{player.lastAction}}</view>
       <view class="player-cards cards-hidden" wx:if="{{!player.isFolded}}">
@@ -88,14 +88,14 @@
         activeColor="#f39c12"
         bindchange="onBetChange"
       />
-      <text class="bet-amount">{{betAmount}}</text>
+      <text class="bet-amount" wx:if="{{betAmount}}">{{betAmount}}</text>
     </view>
     
     <!-- 操作按钮 -->
     <view class="action-buttons">
       <button class="btn-fold" bindtap="fold">弃牌</button>
       <button class="btn-check" bindtap="check" wx:if="{{canCheck}}">过牌</button>
-      <button class="btn-call" bindtap="call" wx:if="{{!canCheck}}">跟注 {{toCall}}</button>
+      <button class="btn-call" bindtap="call" wx:if="{{!canCheck}}">跟注 {{toCall || 0}}</button>
       <button class="btn-raise" bindtap="raise">加注</button>
       <button class="btn-allin" bindtap="allIn">ALL IN</button>
     </view>
