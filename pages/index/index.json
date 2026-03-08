@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "德州扑克",
+  "usingComponents": {
+    "dealer": "/components/dealer/dealer"
+  }
+}
