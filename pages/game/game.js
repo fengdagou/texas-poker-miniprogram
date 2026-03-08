@@ -51,9 +51,9 @@ Page({
 
   initGame() {
     const roomId = this.data.roomId || app.generateRoomId()
-    const myId = wx.getStorageSync('userId')
+    const myId = wx.getStorageSync('userId') || 'user_001'
     const myName = '玩家' + myId.substr(-4)
-    const myCoins = app.getCoins()
+    const myCoins = app.getCoins() || 10000
 
     // 创建游戏状态
     const game = new GameState(roomId, myId, { small: 10, big: 20 })
@@ -77,14 +77,24 @@ Page({
     // 找到我的索引
     const myIndex = game.players.findIndex(p => p.id === myId)
 
+    // 初始化底池和公共牌
     this.setData({
       game,
       myIndex,
       myName,
-      roomId
+      roomId,
+      pot: 0,
+      communityCards: [],
+      players: game.players.map(p => p.toJSON()),
+      myHand: [],
+      myChips: myCoins,
+      myCurrentBet: 0,
+      stageText: '等待开始',
+      gameStage: 0
     })
 
-    this.updateGameState()
+    // 自动开始游戏
+    setTimeout(() => this.startGame(), 500)
   },
 
   startGame() {
