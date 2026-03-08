@@ -1,0 +1,41 @@
+<!--排行榜页面-->
+<view class="leaderboard-container">
+  <view class="header">
+    <view class="title">🏆 排行榜</view>
+    <view class="tabs">
+      <view class="tab {{currentTab === 'week' ? 'active' : ''}}" bindtap="switchTab" data-tab="week">周榜</view>
+      <view class="tab {{currentTab === 'month' ? 'active' : ''}}" bindtap="switchTab" data-tab="month">月榜</view>
+      <view class="tab {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">总榜</view>
+    </view>
+  </view>
+
+  <view class="my-rank" wx:if="{{myRank}}">
+    <view class="rank-number {{myRank <= 3 ? 'top' : ''}}">{{myRank}}</view>
+    <view class="rank-info">
+      <view class="rank-name">我</view>
+      <view class="rank-score">{{myScore}} 金币</view>
+    </view>
+  </view>
+
+  <view class="rank-list">
+    <view class="rank-item" wx:for="{{rankList}}" wx:key="userId">
+      <view class="rank-number {{index < 3 ? 'top' : ''}}">{{index + 1}}</view>
+      <view class="rank-avatar">
+        <image src="{{item.avatar}}" mode="aspectFill" />
+      </view>
+      <view class="rank-info">
+        <view class="rank-name">{{item.name}}</view>
+        <view class="rank-score">{{item.score}} 金币</view>
+      </view>
+      <view class="rank-trend {{item.trend}}">
+        <text wx:if="{{item.trend === 'up'}}">↑</text>
+        <text wx:if="{{item.trend === 'down'}}">↓</text>
+        <text wx:if="{{item.trend === 'same'}}">-</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{rankList.length === 0}}">
+    <text>暂无数据</text>
+  </view>
+</view>

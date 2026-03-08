@@ -1,0 +1,29 @@
+<!--美女荷官组件-->
+<view class="dealer-container" wx:if="{{showDealer}}">
+  <view class="dealer-avatar" bindtap="toggleDealerVoice">
+    <image class="dealer-image" src="{{dealerSkin}}" mode="aspectFill" />
+    <view class="dealer-speak-indicator" wx:if="{{isSpeaking}}">
+      <view class="speak-wave wave-1"></view>
+      <view class="speak-wave wave-2"></view>
+      <view class="speak-wave wave-3"></view>
+    </view>
+  </view>
+  
+  <view class="dealer-dialog" wx:if="{{dealerMessage}}">
+    <view class="dealer-bubble">
+      <text>{{dealerMessage}}</text>
+    </view>
+  </view>
+  
+  <view class="dealer-controls">
+    <view class="control-btn" bindtap="prevSkin">
+      <text class="icon">◀</text>
+    </view>
+    <view class="control-btn" bindtap="toggleMute">
+      <text class="icon">{{dealerMuted ? '🔇' : '🔊'}}</text>
+    </view>
+    <view class="control-btn" bindtap="nextSkin">
+      <text class="icon">▶</text>
+    </view>
+  </view>
+</view>
