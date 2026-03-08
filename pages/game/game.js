@@ -14,12 +14,15 @@ const STAGE_TEXTS = {
 }
 
 const DEALING_MESSAGES = [
-  '发牌中...',
-  '祝你好运 🍀',
-  '精彩的对局即将开始',
-  'Victoria 为你发牌',
-  '准备好迎接好运了吗？'
+  { text: '发牌中...', voice: 'dealer-1.mp3' },
+  { text: '祝你好运 🍀', voice: 'dealer-2.mp3' },
+  { text: '精彩的对局即将开始', voice: 'dealer-3.mp3' },
+  { text: 'Victoria 为你发牌', voice: 'dealer-4.mp3' },
+  { text: '准备好迎接好运了吗？', voice: 'dealer-5.mp3' }
 ]
+
+// 内部音频上下文（用于播放语音）
+let innerAudioContext = null
 
 Page({
   data: {
@@ -133,16 +136,50 @@ Page({
   },
 
   showDealingAnimation() {
-    const randomMessage = DEALING_MESSAGES[Math.floor(Math.random() * DEALING_MESSAGES.length)]
+    const randomIndex = Math.floor(Math.random() * DEALING_MESSAGES.length)
+    const randomMessage = DEALING_MESSAGES[randomIndex]
+    
     this.setData({
       isDealing: true,
-      dealingMessage: randomMessage
+      dealingMessage: randomMessage.text
     })
+    
+    // 播放荷官语音
+    this.playDealerVoice(randomMessage.voice)
     
     // 2.5 秒后隐藏动画
     setTimeout(() => {
       this.setData({ isDealing: false })
     }, 2500)
+  },
+
+  playDealerVoice(voiceFile) {
+    try {
+      // 创建内部音频上下文
+      if (!innerAudioContext) {
+        innerAudioContext = wx.createInnerAudioContext()
+        innerAudioContext.autoplay = false
+        innerAudioContext.onError((res) => {
+          console.log('语音播放失败:', res)
+        })
+      }
+      
+      const voicePath = `/sounds/dealer/${voiceFile}`
+      console.log('播放荷官语音:', voicePath)
+      
+      innerAudioContext.src = voicePath
+      innerAudioContext.play()
+    } catch (error) {
+      console.log('语音播放异常:', error)
+    }
+  },
+
+  onUnload() {
+    // 页面卸载时清理音频
+    if (innerAudioContext) {
+      innerAudioContext.destroy()
+      innerAudioContext = null
+    }
   },
 
   updateGameState() {
