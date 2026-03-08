@@ -78,19 +78,19 @@ Page({
     this.setData({
       game,
       myIndex,
-      myName,
+      myName: myName || '玩家',
       roomId,
       pot: 0,
       communityCards: [],
       players: game.players.map(p => ({
-        name: p.name,
-        chips: p.chips,
+        name: p.name || '玩家',
+        chips: p.chips || 0,
         isBot: p.isBot,
         isFolded: false,
         lastAction: ''
       })),
       myHand: [],
-      myChips: myCoins,
+      myChips: myCoins || 10000,
       myCurrentBet: 0,
       stageText: '等待开始',
       gameStage: 0
@@ -143,16 +143,16 @@ Page({
       pot: state.pot,
       communityCards: state.communityCards || [],
       players: state.players.map(p => ({
-        name: p.name,
-        chips: p.chips,
-        currentBet: p.currentBet,
+        name: p.name || '未知玩家',
+        chips: p.chips || 0,
+        currentBet: p.currentBet || 0,
         isBot: p.isBot,
         isFolded: p.isFolded,
         lastAction: p.lastAction || ''
       })),
-      myHand: myPlayer.hand || [],
-      myChips: myPlayer.chips,
-      myCurrentBet: myPlayer.currentBet,
+      myHand: myPlayer.hand && myPlayer.hand.length > 0 ? myPlayer.hand : [],
+      myChips: myPlayer.chips || 0,
+      myCurrentBet: myPlayer.currentBet || 0,
       isMyTurn,
       canCheck,
       toCall,
@@ -160,6 +160,8 @@ Page({
       maxBet,
       betAmount: Math.min(minBet * 2, maxBet)
     })
+    
+    console.log('界面已更新，myHand:', this.data.myHand)
 
     // 检查游戏是否结束
     if (state.stage === GAME_STAGE.FINISHED && state.winner) {
