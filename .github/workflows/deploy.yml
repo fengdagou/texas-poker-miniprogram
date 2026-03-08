@@ -42,12 +42,12 @@ jobs:
         
         # 使用微信 CLI 上传
         npx miniprogram-ci upload \
-          --project-path . \
-          --private-key ~/.wechat-miniprogram/private.key \
           --appid ${{ secrets.WECHAT_APPID }} \
-          --desc "自动部署：${{ github.event.head_commit.message }}" \
-          --version "${{ steps.version.outputs.version }}" \
-          --upload-output-file ./upload-result.json || true
+          --project-path . \
+          --private-key-path ~/.wechat-miniprogram/private.key \
+          --upload-version "${{ steps.version.outputs.version }}" \
+          --upload-description "自动部署：${{ github.event.head_commit.message }}" \
+          --verbose
           
     - name: Show result
       run: |
