@@ -139,10 +139,10 @@ Page({
     const currentPlayerIndex = state.currentPlayerIndex
     const isMyTurn = currentPlayerIndex === this.data.myIndex && state.stage < GAME_STAGE.SHOWDOWN
 
-    const toCall = state.currentBet - myPlayer.currentBet
+    const toCall = (state.currentBet || 0) - (myPlayer.currentBet || 0)
     const canCheck = toCall === 0
-    const minBet = state.minRaise
-    const maxBet = myPlayer.chips
+    const minBet = state.minRaise || 20
+    const maxBet = myPlayer.chips || 100
 
     // 更新界面
     this.setData({
@@ -166,7 +166,7 @@ Page({
       toCall: toCall || 0,
       minBet: minBet || 20,
       maxBet: maxBet || 100,
-      betAmount: Math.min(minBet * 2, maxBet) || 20
+      betAmount: Math.min((minBet || 20) * 2, (maxBet || 100))
     })
     
     console.log('玩家下注信息:', state.players.map(p => ({ name: p.name, currentBet: p.currentBet, lastAction: p.lastAction })))

@@ -21,7 +21,7 @@
     <view 
       class="player {{player.isBot ? 'bot' : ''}} {{playerIndex === currentPlayerIndex ? 'active' : ''}}"
       wx:for="{{players}}"
-      wx:key="id"
+      wx:key="name"
       wx:if="{{playerIndex !== myIndex}}"
       wx:for-item="player"
       wx:for-index="playerIndex"
