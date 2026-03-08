@@ -86,7 +86,7 @@
       <button class="btn-check" bindtap="check" wx:if="{{canCheck}}">过牌</button>
       <button class="btn-call" bindtap="call" wx:if="{{!canCheck}}">跟注 {{toCall}}</button>
       <button class="btn-raise" bindtap="raise">加注</button>
-      <button class="btn-allin" bindtap="allIn">全下</button>
+      <button class="btn-allin" bindtap="allIn">ALL IN</button>
     </view>
   </view>
 
