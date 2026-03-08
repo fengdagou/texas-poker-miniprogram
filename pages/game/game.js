@@ -262,5 +262,12 @@ Page({
 
   exitGame() {
     wx.navigateBack()
+  },
+
+  // 获取花色样式类
+  getSuitClass(suit) {
+    if (!suit) return ''
+    if (suit === '♥' || suit === '♦') return 'red'
+    return 'black'
   }
 })
