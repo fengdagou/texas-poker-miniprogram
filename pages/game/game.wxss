@@ -275,45 +275,69 @@
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.95);
-  padding: 15rpx;
-  padding-bottom: 20rpx;
+  padding: 20rpx;
+  padding-bottom: 25rpx;
   z-index: 100;
-  max-height: 260rpx;
+  max-height: 300rpx;
 }
 
 .bet-slider {
   display: flex;
   align-items: center;
   gap: 15rpx;
-  margin-bottom: 15rpx;
+  margin-bottom: 20rpx;
   padding: 0 15rpx;
 }
 
 .bet-slider slider {
   flex: 1;
-  height: 40rpx;
+  height: 45rpx;
 }
 
 .bet-amount {
   color: #ffd700;
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: bold;
-  min-width: 80rpx;
+  min-width: 90rpx;
   text-align: right;
+}
+
+/* 快捷下注按钮 */
+.bet-presets {
+  display: flex;
+  gap: 10rpx;
+  justify-content: center;
+  margin-bottom: 15rpx;
+  padding: 0 15rpx;
+}
+
+.bet-preset-btn {
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  background: rgba(243, 156, 18, 0.2);
+  border: 2rpx solid #f39c12;
+  color: #f39c12;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.bet-preset-btn.active {
+  background: #f39c12;
+  color: white;
 }
 
 .action-buttons {
   display: flex;
   flex-direction: row;
-  gap: 8rpx;
+  gap: 10rpx;
   justify-content: center;
   align-items: center;
 }
 
 .action-buttons button {
-  padding: 12rpx 18rpx;
-  border-radius: 10rpx;
-  font-size: 22rpx;
+  padding: 16rpx 22rpx;
+  border-radius: 12rpx;
+  font-size: 24rpx;
   font-weight: bold;
   border: none;
   min-width: auto;

@@ -240,7 +240,19 @@ Page({
   },
 
   onBetChange(e) {
-    this.setData({ betAmount: e.detail.value })
+    this.setData({ 
+      betAmount: e.detail.value,
+      presetIndex: -1
+    })
+  },
+
+  // 设置快捷下注金额
+  setBetAmount(e) {
+    const amount = e.currentTarget.dataset.amount
+    this.setData({ 
+      betAmount: amount,
+      presetIndex: [20, 50, 100, 200].indexOf(amount)
+    })
   },
 
   showResult(winner) {
