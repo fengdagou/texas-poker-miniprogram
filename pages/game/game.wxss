@@ -171,13 +171,14 @@
   display: block;
 }
 
-.card .spades,
-.card .clubs {
+/* 花色颜色 - 直接作用于 card 元素 */
+.card.spades,
+.card.clubs {
   color: #2c3e50;
 }
 
-.card .hearts,
-.card .diamonds {
+.card.hearts,
+.card.diamonds {
   color: #e74c3c;
 }
 

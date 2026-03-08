@@ -55,7 +55,7 @@
   <!-- 我的手牌区域 -->
   <view class="my-area">
     <view class="my-cards">
-      <view class="card {{getSuitClass(card.suit)}}" wx:for="{{myHand}}" wx:key="index">
+      <view class="card {{getSuitClass(card.suit)}}" wx:for="{{myHand}}" wx:key="*this" wx:for-item="card">
         <text class="card-rank">{{card.rank}}{{card.suit}}</text>
       </view>
     </view>
