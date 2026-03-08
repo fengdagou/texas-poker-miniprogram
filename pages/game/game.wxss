@@ -10,31 +10,51 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20rpx 30rpx;
+  padding: 15rpx 20rpx;
   background: rgba(0, 0, 0, 0.3);
+  flex-wrap: wrap;
+  gap: 10rpx;
 }
 
 .room-info {
   color: white;
-  font-size: 28rpx;
+  font-size: 24rpx;
   font-weight: bold;
 }
 
 .pot-info {
   background: rgba(243, 156, 18, 0.2);
-  padding: 10rpx 30rpx;
-  border-radius: 20rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 15rpx;
 }
 
 .pot-label {
   color: #f39c12;
-  font-size: 28rpx;
+  font-size: 24rpx;
 }
 
 .pot-amount {
   color: #ffd700;
-  font-size: 32rpx;
+  font-size: 28rpx;
   font-weight: bold;
+}
+
+.my-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5rpx;
+}
+
+.my-chips-top {
+  color: #ffd700;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.my-bet-top {
+  color: #f39c12;
+  font-size: 22rpx;
 }
 
 .opponents-area {

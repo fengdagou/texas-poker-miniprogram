@@ -10,6 +10,10 @@
       <text class="pot-label">底池：</text>
       <text class="pot-amount">{{pot}}</text>
     </view>
+    <view class="my-status">
+      <text class="my-chips-top">💰 {{myChips}}</text>
+      <text wx:if="{{myCurrentBet > 0}}" class="my-bet-top">已下注：{{myCurrentBet}}</text>
+    </view>
   </view>
 
   <!-- 对手区域 -->
@@ -61,11 +65,6 @@
       <view class="card {{getSuitClass(card.suit)}}" wx:for="{{myHand}}" wx:key="*this" wx:for-item="card">
         <text class="card-rank">{{card.rank}}{{card.suit}}</text>
       </view>
-    </view>
-    <view class="my-info">
-      <view class="my-name">{{myName}}</view>
-      <view class="my-chips">💰 {{myChips}}</view>
-      <view class="my-bet" wx:if="{{myCurrentBet > 0}}">已下注：{{myCurrentBet}}</view>
     </view>
   </view>
 
