@@ -37,7 +37,7 @@ class Player {
     this.lastAction = null
   }
 
-  toJSON() {
+  toJSON(revealHand = false) {
     return {
       id: this.id,
       name: this.name,
@@ -47,8 +47,8 @@ class Player {
       isAllIn: this.isAllIn,
       isBot: this.isBot,
       lastAction: this.lastAction,
-      // 不暴露手牌给前端（除非摊牌）
-      hand: this.hand.map(c => c.toJSON())
+      // 只在摊牌时或玩家自己时暴露手牌
+      hand: revealHand ? this.hand.map(c => c.toJSON()) : []
     }
   }
 }
@@ -389,7 +389,7 @@ class GameState {
     this.stage = GAME_STAGE.FINISHED
   }
 
-  getState() {
+  getState(currentViewPlayerId = null) {
     return {
       roomId: this.roomId,
       stage: this.stage,
@@ -398,7 +398,11 @@ class GameState {
       currentBet: this.currentBet,
       currentPlayerIndex: this.currentPlayerIndex,
       dealerIndex: this.dealerIndex,
-      players: this.players.map(p => p.toJSON()),
+      players: this.players.map(p => {
+        // 每个玩家只能看到自己的手牌
+        const revealHand = currentViewPlayerId ? (p.id === currentViewPlayerId || this.stage >= GAME_STAGE.SHOWDOWN) : false
+        return p.toJSON(revealHand)
+      }),
       winner: this.winner ? {
         players: this.winner.players.map(p => ({ id: p.id, name: p.name })),
         hand: this.winner.hand,

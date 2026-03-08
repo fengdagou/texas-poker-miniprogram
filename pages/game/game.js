@@ -111,7 +111,8 @@ Page({
 
   updateGameState() {
     const game = this.data.game
-    const state = game.getState()
+    const myId = wx.getStorageSync('userId') || 'user_001'
+    const state = game.getState(myId)
     const myPlayer = state.players[this.data.myIndex]
 
     const currentPlayerIndex = state.currentPlayerIndex
@@ -132,7 +133,8 @@ Page({
       stageText: STAGE_TEXTS[state.stage],
       pot: state.pot,
       communityCards: state.communityCards,
-      myHand: myPlayer.hand
+      myHand: myPlayer.hand,
+      myHandLength: myPlayer.hand ? myPlayer.hand.length : 0
     })
 
     this.setData({
