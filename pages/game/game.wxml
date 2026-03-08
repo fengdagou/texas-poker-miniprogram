@@ -1,5 +1,20 @@
 <!--pages/game/game.wxml-->
 <view class="game-container">
+  <!-- 荷官区域 -->
+  <view class="dealer-area" wx:if="{{isDealing}}">
+    <view class="dealer-avatar">
+      <text class="dealer-emoji">👩‍🦳</text>
+    </view>
+    <view class="dealer-name">Victoria</view>
+    <view class="dealer-message">{{dealingMessage}}</view>
+    <!-- 发牌动画 -->
+    <view class="dealing-animation">
+      <view class="flying-card card-1"></view>
+      <view class="flying-card card-2"></view>
+      <view class="flying-card card-3"></view>
+    </view>
+  </view>
+  
   <!-- 顶部信息栏 -->
   <view class="top-bar">
     <view class="room-info">

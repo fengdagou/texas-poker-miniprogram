@@ -13,6 +13,14 @@ const STAGE_TEXTS = {
   6: '结束'
 }
 
+const DEALING_MESSAGES = [
+  '发牌中...',
+  '祝你好运 🍀',
+  '精彩的对局即将开始',
+  'Victoria 为你发牌',
+  '准备好迎接好运了吗？'
+]
+
 Page({
   data: {
     game: null,
@@ -38,7 +46,9 @@ Page({
     winnerHand: null,
     winAmount: 0,
     allPlayers: [],
-    communityCards: []
+    communityCards: [],
+    isDealing: false,
+    dealingMessage: ''
   },
 
   onLoad(options) {
@@ -104,14 +114,35 @@ Page({
 
   startGame() {
     console.log('开始游戏...')
+    
+    // 显示荷官发牌动画
+    this.showDealingAnimation()
+    
     const result = this.data.game.startGame()
     if (result.success) {
       console.log('游戏启动成功，更新状态')
-      this.updateGameState()
+      // 延迟更新状态，等待发牌动画
+      setTimeout(() => {
+        this.updateGameState()
+      }, 2500)
     } else {
       console.error('游戏启动失败:', result.message)
       wx.showToast({ title: result.message, icon: 'none' })
+      this.setData({ isDealing: false })
     }
+  },
+
+  showDealingAnimation() {
+    const randomMessage = DEALING_MESSAGES[Math.floor(Math.random() * DEALING_MESSAGES.length)]
+    this.setData({
+      isDealing: true,
+      dealingMessage: randomMessage
+    })
+    
+    // 2.5 秒后隐藏动画
+    setTimeout(() => {
+      this.setData({ isDealing: false })
+    }, 2500)
   },
 
   updateGameState() {
