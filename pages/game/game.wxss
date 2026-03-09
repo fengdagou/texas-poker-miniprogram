@@ -504,43 +504,59 @@
 
 /* ========== 花色颜色 - 最高优先级 ========== */
 /* 红色花色：红桃♥ 方块♦ */
+.suit-red {
+  color: red !important;
+}
+.suit-red .card-rank {
+  color: red !important;
+}
 .card.hearts {
-  color: #dc143c !important;
+  color: red !important;
 }
 .card.hearts .card-rank {
-  color: #dc143c !important;
+  color: red !important;
 }
 .card.diamonds {
-  color: #dc143c !important;
+  color: red !important;
 }
 .card.diamonds .card-rank {
-  color: #dc143c !important;
+  color: red !important;
 }
 text.hearts,
 text.diamonds,
 .card-rank.hearts,
-.card-rank.diamonds {
-  color: #dc143c !important;
+.card-rank.diamonds,
+text.suit-red,
+.card-rank.suit-red {
+  color: red !important;
 }
 
 /* 黑色花色：黑桃♠ 梅花♣ */
+.suit-black {
+  color: black !important;
+}
+.suit-black .card-rank {
+  color: black !important;
+}
 .card.spades {
-  color: #000000 !important;
+  color: black !important;
 }
 .card.spades .card-rank {
-  color: #000000 !important;
+  color: black !important;
 }
 .card.clubs {
-  color: #000000 !important;
+  color: black !important;
 }
 .card.clubs .card-rank {
-  color: #000000 !important;
+  color: black !important;
 }
 text.spades,
 text.clubs,
 .card-rank.spades,
-.card-rank.clubs {
-  color: #000000 !important;
+.card-rank.clubs,
+text.suit-black,
+.card-rank.suit-black {
+  color: black !important;
 }
 
 .stage-label {
