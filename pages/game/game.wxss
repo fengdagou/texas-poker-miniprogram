@@ -1,19 +1,5 @@
 /* pages/game/game.wxss - 古典风格 */
 
-/* ========== 全局花色颜色 - 放在最前面 ========== */
-.suit-red {
-  color: red !important;
-}
-.suit-red .card-rank {
-  color: red !important;
-}
-.suit-black {
-  color: black !important;
-}
-.suit-black .card-rank {
-  color: black !important;
-}
-
 /* ========== 古典主题变量 ========== */
 .game-container {
   min-height: 100vh;
