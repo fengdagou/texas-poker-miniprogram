@@ -507,5 +507,12 @@ Page({
     if (suit === '♠') return 'spades'
     if (suit === '♣') return 'clubs'
     return ''
+  },
+
+  // 获取花色颜色（内联样式用）
+  getSuitColor(suit) {
+    if (!suit) return '#2c1810'
+    if (suit === '♥' || suit === '♦') return '#dc143c'
+    return '#000000'
   }
 })
