@@ -275,9 +275,9 @@ class GameState {
     // 检查是否所有未弃牌的玩家都 ALL IN 了
     const allInOrFolded = this.players.every(p => p.isFolded || p.isAllIn)
     if (allInOrFolded) {
-      // 所有玩家都 All-in 或弃牌，直接摊牌
-      console.log('所有玩家都 ALL IN 或弃牌，进入摊牌')
-      this.goToShowdown()
+      // 所有玩家都 All-in 或弃牌，继续发公共牌（而不是直接摊牌）
+      console.log('所有玩家都 ALL IN，继续发公共牌')
+      this.nextStage()
       return
     }
 
