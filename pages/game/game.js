@@ -295,6 +295,15 @@ Page({
     const wasMyTurn = this.data.isMyTurn
     const isNowMyTurn = isMyTurn && !wasMyTurn
     
+    console.log('📊 isMyTurn 计算:', {
+      currentPlayerIndex,
+      myIndex: this.data.myIndex,
+      isMatch: currentPlayerIndex === this.data.myIndex,
+      stage: state.stage,
+      stageLtShowdown: state.stage < GAME_STAGE.SHOWDOWN,
+      isMyTurn
+    })
+    
     // 更新界面
     this.setData({
       gameStage: state.stage || 0,
@@ -319,6 +328,8 @@ Page({
       maxBet: maxBet || 100,
       betAmount: Math.min((minRaise || 20) * 2, (maxBet || 100))
     })
+    
+    console.log('✅ setData 完成')
     
     // 如果是玩家的回合，播放提示音
     if (isNowMyTurn && isMyTurn) {
