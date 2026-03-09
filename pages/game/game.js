@@ -346,8 +346,7 @@ Page({
       return
     }
 
-    // 检查金币输光/赢光情况
-    const myPlayer = state.players[this.data.myIndex]
+    // 检查金币输光/赢光情况（myPlayer 已在前面定义）
     const botPlayers = state.players.filter(p => p.isBot)
     const myChips = myPlayer ? myPlayer.chips : 0
     const allBotsBankrupt = botPlayers.every(p => p.chips === 0)
