@@ -87,10 +87,10 @@
   <view class="action-area" wx:if="{{isMyTurn && gameStage < 5}}">
     <!-- 快捷下注按钮 -->
     <view class="bet-presets">
-      <view class="bet-preset-btn {{betAmount === 20 ? 'active' : ''}}" bindtap="setBetAmount" data-amount="20">20</view>
       <view class="bet-preset-btn {{betAmount === 50 ? 'active' : ''}}" bindtap="setBetAmount" data-amount="50">50</view>
       <view class="bet-preset-btn {{betAmount === 100 ? 'active' : ''}}" bindtap="setBetAmount" data-amount="100">100</view>
       <view class="bet-preset-btn {{betAmount === 200 ? 'active' : ''}}" bindtap="setBetAmount" data-amount="200">200</view>
+      <view class="bet-preset-btn {{betAmount === 500 ? 'active' : ''}}" bindtap="setBetAmount" data-amount="500">500</view>
     </view>
     
     <!-- 滑动条 -->
