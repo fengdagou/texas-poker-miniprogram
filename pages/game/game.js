@@ -117,16 +117,29 @@ Page({
   },
 
   startGame() {
-    console.log('开始游戏...')
+    console.log('=== 开始游戏 ===')
     
     // 显示荷官发牌动画
     this.showDealingAnimation()
     
     const result = this.data.game.startGame()
     if (result.success) {
-      console.log('游戏启动成功，更新状态')
-      // 延迟更新状态，等待发牌动画
+      console.log('游戏启动成功')
+      console.log('庄家索引:', this.data.game.dealerIndex)
+      console.log('当前玩家索引:', this.data.game.currentPlayerIndex)
+      console.log('玩家列表:', this.data.game.players.map(p => ({ 
+        id: p.id, 
+        name: p.name, 
+        isBot: p.isBot,
+        chips: p.chips 
+      })))
+      
+      // 立即更新一次界面，显示盲注
+      this.updateGameState()
+      
+      // 发牌动画结束后再更新一次（显示手牌）
       setTimeout(() => {
+        console.log('发牌动画结束，刷新游戏状态')
         this.updateGameState()
       }, 2500)
     } else {
@@ -292,7 +305,14 @@ Page({
     // 机器人自动操作
     if (!isMyTurn && state.stage < GAME_STAGE.SHOWDOWN) {
       const currentPlayer = state.players[currentPlayerIndex]
+      console.log('检查机器人操作:', { 
+        isMyTurn, 
+        stage: state.stage, 
+        currentPlayer: currentPlayer ? currentPlayer.name : 'null',
+        isBot: currentPlayer ? currentPlayer.isBot : false 
+      })
       if (currentPlayer && currentPlayer.isBot) {
+        console.log('触发机器人操作:', currentPlayer.name)
         setTimeout(() => this.botAction(currentPlayer), 1000)
       }
     }
@@ -302,6 +322,13 @@ Page({
     const game = this.data.game
     const state = game.getState()
     const toCall = state.currentBet - botPlayer.currentBet
+
+    console.log('机器人决策:', { 
+      name: botPlayer.name, 
+      toCall, 
+      chips: botPlayer.chips,
+      currentBet: botPlayer.currentBet 
+    })
 
     let action = ACTION.CHECK
     let amount = 0
