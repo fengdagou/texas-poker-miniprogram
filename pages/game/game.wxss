@@ -516,8 +516,8 @@
 .card.spades .card-rank,
 .card.clubs,
 .card.clubs .card-rank {
-  color: #2c1810 !important;
-  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+  color: black !important;
+  text-shadow: none !important;
 }
 
 /* 红色花色 */
@@ -525,8 +525,19 @@
 .card.hearts .card-rank,
 .card.diamonds,
 .card.diamonds .card-rank {
-  color: #e74c3c !important;
-  text-shadow: 0 2rpx 4rpx rgba(231, 76, 60, 0.3);
+  color: red !important;
+  text-shadow: none !important;
+}
+
+/* 确保 card-rank 本身也有颜色 */
+.card-rank.hearts,
+.card-rank.diamonds {
+  color: red !important;
+}
+
+.card-rank.spades,
+.card-rank.clubs {
+  color: black !important;
 }
 
 .stage-label {
