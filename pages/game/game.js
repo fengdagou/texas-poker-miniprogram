@@ -288,7 +288,7 @@ Page({
 
     const toCall = (state.currentBet || 0) - (myPlayer.currentBet || 0)
     const canCheck = toCall === 0
-    const minBet = state.minRaise || 20
+    const minRaise = state.minRaise || 20
     const maxBet = myPlayer.chips || 100
 
     // 检查是否轮到玩家
