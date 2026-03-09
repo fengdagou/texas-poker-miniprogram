@@ -1,37 +1,25 @@
 /* pages/game/game.wxss - 古典风格 */
 
-/* ========== 花色颜色 - 最简单直接的方式 ========== */
-/* 红色花色 - 使用多种选择器确保生效 */
-.red-suit {
+/* ========== 花色颜色 - 使用 data 属性选择器 ========== */
+/* 红色花色 */
+[data-color="red"] {
   color: #FF0000 !important;
 }
-.red-suit .card-rank {
+text[data-color="red"] {
   color: #FF0000 !important;
 }
-text.red-suit {
-  color: #FF0000 !important;
-}
-.card.red-suit {
-  color: #FF0000 !important;
-}
-.card.red-suit .card-rank {
+.card-rank[data-color="red"] {
   color: #FF0000 !important;
 }
 
-/* 黑色花色 - 使用多种选择器确保生效 */
-.black-suit {
+/* 黑色花色 */
+[data-color="black"] {
   color: #000000 !important;
 }
-.black-suit .card-rank {
+text[data-color="black"] {
   color: #000000 !important;
 }
-text.black-suit {
-  color: #000000 !important;
-}
-.card.black-suit {
-  color: #000000 !important;
-}
-.card.black-suit .card-rank {
+.card-rank[data-color="black"] {
   color: #000000 !important;
 }
 

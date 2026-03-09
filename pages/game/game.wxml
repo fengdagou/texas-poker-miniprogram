@@ -77,8 +77,8 @@
   <!-- 我的手牌区域 -->
   <view class="my-area">
     <view class="my-cards">
-      <view class="card {{getSuitClass(card.suit)}}" wx:for="{{myHand}}" wx:key="*this" wx:for-item="card">
-        <text class="card-rank" style="color: {{card.suit === '♥' || card.suit === '♦' ? '#FF0000' : '#000000'}}">{{card.rank}}{{card.suit}}</text>
+      <view class="card {{getSuitClass(card.suit)}}" data-suit="{{card.suit}}" wx:for="{{myHand}}" wx:key="*this" wx:for-item="card">
+        <text class="card-rank" data-color="{{card.suit === '♥' || card.suit === '♦' ? 'red' : 'black'}}">{{card.rank}}{{card.suit}}</text>
       </view>
     </view>
   </view>
