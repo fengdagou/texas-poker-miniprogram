@@ -597,10 +597,10 @@ text.suit-black,
 }
 
 /* ========== 我的手牌区域 ========== */
-/* ========== 我的手牌区域 - 上移确保可见 ========== */
+/* ========== 我的手牌区域 - 上移到合适位置 ========== */
 .my-area {
   position: fixed;
-  bottom: 380rpx;
+  bottom: 400rpx;
   left: 0;
   right: 0;
   background: transparent;
@@ -617,9 +617,9 @@ text.suit-black,
 }
 
 .my-cards .card {
-  width: 80rpx;
-  height: 115rpx;
-  font-size: 40rpx;
+  width: 85rpx;
+  height: 120rpx;
+  font-size: 42rpx;
   box-shadow: 
     0 6rpx 20rpx rgba(0, 0, 0, 0.6),
     inset 0 2rpx 10rpx rgba(255, 255, 255, 0.6);
@@ -628,7 +628,7 @@ text.suit-black,
   border: 2rpx solid rgba(139, 69, 19, 0.4);
 }
 
-/* ========== 操作按钮区域 - 高度增加 ========== */
+/* ========== 操作按钮区域 - 横向四列布局 ========== */
 .action-area {
   position: fixed;
   bottom: 0;
@@ -636,11 +636,11 @@ text.suit-black,
   right: 0;
   background: linear-gradient(180deg, rgba(44, 24, 16, 0.95) 0%, rgba(26, 15, 10, 0.98) 100%);
   padding: 15rpx 15rpx;
-  padding-bottom: 35rpx;
+  padding-bottom: 25rpx;
   z-index: 100;
   border-top: 2rpx solid rgba(212, 175, 55, 0.4);
   box-shadow: 0 -5rpx 25rpx rgba(0, 0, 0, 0.5);
-  max-height: 420rpx;
+  max-height: 340rpx;
 }
 
 .bet-slider {
@@ -665,26 +665,28 @@ text.suit-black,
   text-shadow: 0 2rpx 10rpx rgba(255, 215, 0, 0.4);
 }
 
-/* 快捷下注按钮 - 放大 */
+/* 快捷下注按钮 - 横向 4 个方块 */
 .bet-presets {
   display: flex;
-  gap: 12rpx;
+  gap: 10rpx;
   justify-content: center;
   margin-bottom: 15rpx;
-  padding: 0 15rpx;
+  padding: 0 10rpx;
 }
 
 .bet-preset-btn {
-  padding: 14rpx 24rpx;
+  flex: 1;
+  padding: 14rpx 10rpx;
   border-radius: 12rpx;
   background: linear-gradient(135deg, rgba(62, 39, 25, 0.8) 0%, rgba(44, 24, 16, 0.9) 100%);
   border: 2rpx solid rgba(212, 175, 55, 0.4);
   color: #d4af37;
-  font-size: 24rpx;
+  font-size: 22rpx;
   font-weight: bold;
   box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
-  min-width: 80rpx;
+  text-align: center;
+  min-width: 70rpx;
 }
 
 .bet-preset-btn.active {
@@ -700,25 +702,25 @@ text.suit-black,
 /* 操作按钮 - 古典风格 */
 .action-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10rpx;
   justify-content: center;
   align-items: center;
 }
 
 .action-buttons button {
-  padding: 16rpx 0;
-  border-radius: 14rpx;
-  font-size: 24rpx;
+  flex: 1;
+  padding: 16rpx 8rpx;
+  border-radius: 12rpx;
+  font-size: 22rpx;
   font-weight: bold;
   border: none;
-  width: 90%;
-  max-width: 500rpx;
   white-space: nowrap;
   box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  min-width: 0;
 }
 
 .action-buttons button::before {
