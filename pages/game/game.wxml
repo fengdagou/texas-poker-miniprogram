@@ -60,12 +60,12 @@
   <view class="community-area">
     <view class="community-cards">
       <view 
-        class="card {{getSuitClass(card.suit)}} {{getSuitColorClass(card.suit)}}"
+        class="card {{getSuitClass(card.suit)}}" data-suit="{{card.suit}}"
         wx:for="{{communityCards}}"
         wx:key="index"
         wx:for-item="card"
       >
-        <text wx:if="{{card}}" class="card-rank {{getSuitColorClass(card.suit)}}">{{card.rank}}{{card.suit}}</text>
+        <text wx:if="{{card}}" class="card-rank" data-color="{{card.suit === '♥' || card.suit === '♦' ? 'red' : 'black'}}">{{card.rank}}{{card.suit}}</text>
       </view>
       <view class="card empty" wx:if="{{communityCards.length < 5}}"></view>
       <view class="card empty" wx:if="{{communityCards.length < 4}}"></view>
@@ -147,8 +147,8 @@
       <view class="community-cards-result">
         <view class="community-title">🎴 公共牌</view>
         <view class="community-list">
-          <view class="card {{getSuitClass(card.suit)}} {{getSuitColorClass(card.suit)}}" wx:for="{{communityCards}}" wx:key="*this" wx:for-item="card">
-            <text class="card-rank {{getSuitColorClass(card.suit)}}">{{card.rank}}{{card.suit}}</text>
+          <view class="card {{getSuitClass(card.suit)}}" data-suit="{{card.suit}}" wx:for="{{communityCards}}" wx:key="*this" wx:for-item="card">
+            <text class="card-rank" data-color="{{card.suit === '♥' || card.suit === '♦' ? 'red' : 'black'}}">{{card.rank}}{{card.suit}}</text>
           </view>
           <view class="card empty" wx:if="{{communityCards.length < 5}}"></view>
           <view class="card empty" wx:if="{{communityCards.length < 4}}"></view>
@@ -162,8 +162,8 @@
         <view class="player-hand-item" wx:for="{{allPlayers}}" wx:key="id" wx:for-item="player">
           <view class="player-hand-name">{{player.name}}</view>
           <view class="player-hand-cards">
-            <view class="card {{getSuitClass(card.suit)}} {{getSuitColorClass(card.suit)}}" wx:for="{{player.hand}}" wx:key="*this" wx:for-item="card">
-              <text class="card-rank {{getSuitColorClass(card.suit)}}">{{card.rank}}{{card.suit}}</text>
+            <view class="card {{getSuitClass(card.suit)}}" data-suit="{{card.suit}}" wx:for="{{player.hand}}" wx:key="*this" wx:for-item="card">
+              <text class="card-rank" data-color="{{card.suit === '♥' || card.suit === '♦' ? 'red' : 'black'}}">{{card.rank}}{{card.suit}}</text>
             </view>
             <text wx:if="{{player.hand.length === 0}}" class="no-hand">未发牌</text>
           </view>
