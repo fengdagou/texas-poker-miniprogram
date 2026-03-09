@@ -347,6 +347,7 @@ Page({
     }
 
     // 检查金币输光/赢光情况（myPlayer 已在前面定义）
+    // 注意：只在游戏真正结束后（FINISHED 阶段）才检查，避免提前结束导致无法摊牌
     const botPlayers = state.players.filter(p => p.isBot)
     const myChips = myPlayer ? myPlayer.chips : 0
     const allBotsBankrupt = botPlayers.every(p => p.chips === 0)
@@ -354,18 +355,20 @@ Page({
     console.log('金币检查:', { 
       myChips, 
       allBotsBankrupt,
+      stage: state.stage,
+      isFinished: state.stage === GAME_STAGE.FINISHED,
       bots: botPlayers.map(p => ({ name: p.name, chips: p.chips }))
     })
     
-    // 玩家金币输光 → 游戏失败
-    if (myChips === 0 && state.stage >= GAME_STAGE.PREFLOP) {
+    // 玩家金币输光 → 游戏失败（只在游戏结束后检查）
+    if (myChips === 0 && state.stage === GAME_STAGE.FINISHED) {
       console.log('玩家金币输光，游戏失败')
       this.showBankruptResult(false)
       return
     }
     
-    // 所有机器人金币输光 → 游戏胜利
-    if (allBotsBankrupt && state.stage >= GAME_STAGE.PREFLOP) {
+    // 所有机器人金币输光 → 游戏胜利（只在游戏结束后检查）
+    if (allBotsBankrupt && state.stage === GAME_STAGE.FINISHED) {
       console.log('所有机器人金币输光，游戏胜利')
       this.showBankruptResult(true)
       return
