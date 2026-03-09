@@ -21,8 +21,9 @@ const DEALING_MESSAGES = [
   { text: '准备好迎接好运了吗？', voice: 'dealer-5.mp3' }
 ]
 
-// 内部音频上下文（用于播放语音）
+// 内部音频上下文（用于播放语音和音效）
 let innerAudioContext = null
+let hintAudioContext = null
 
 Page({
   data: {
@@ -174,11 +175,45 @@ Page({
     }
   },
 
+  playActionHint() {
+    try {
+      // 创建提示音音频上下文
+      if (!hintAudioContext) {
+        hintAudioContext = wx.createInnerAudioContext()
+        hintAudioContext.autoplay = false
+        hintAudioContext.volume = 0.6
+        hintAudioContext.onError((res) => {
+          console.log('提示音播放失败:', res)
+        })
+      }
+      
+      // 使用系统提示音（叮的一声）
+      // 微信小程序有内置音效，这里用简单的 beep
+      const beepPath = 'https://downsc.chinaz.net/Files/DownLoad/sound1/201601/6699.wav'
+      console.log('播放出牌提示音')
+      
+      hintAudioContext.src = beepPath
+      hintAudioContext.play()
+      
+      // 震动反馈
+      wx.vibrateShort({
+        type: 'light',
+        fail: (err) => console.log('震动失败:', err)
+      })
+    } catch (error) {
+      console.log('提示音播放异常:', error)
+    }
+  },
+
   onUnload() {
     // 页面卸载时清理音频
     if (innerAudioContext) {
       innerAudioContext.destroy()
       innerAudioContext = null
+    }
+    if (hintAudioContext) {
+      hintAudioContext.destroy()
+      hintAudioContext = null
     }
   },
 
@@ -212,6 +247,10 @@ Page({
     const minBet = state.minRaise || 20
     const maxBet = myPlayer.chips || 100
 
+    // 检查是否轮到玩家
+    const wasMyTurn = this.data.isMyTurn
+    const isNowMyTurn = isMyTurn && !wasMyTurn
+    
     // 更新界面
     this.setData({
       gameStage: state.stage || 0,
@@ -232,10 +271,15 @@ Page({
       isMyTurn,
       canCheck,
       toCall: toCall || 0,
-      minBet: minBet || 20,
+      minBet: minRaise || 20,
       maxBet: maxBet || 100,
-      betAmount: Math.min((minBet || 20) * 2, (maxBet || 100))
+      betAmount: Math.min((minRaise || 20) * 2, (maxBet || 100))
     })
+    
+    // 如果是玩家的回合，播放提示音
+    if (isNowMyTurn && isMyTurn) {
+      this.playActionHint()
+    }
     
     console.log('玩家下注信息:', state.players.map(p => ({ name: p.name, currentBet: p.currentBet, lastAction: p.lastAction })))
     console.log('界面已更新，myHand:', this.data.myHand)

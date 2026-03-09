@@ -121,6 +121,19 @@
     <text>等待其他玩家操作...</text>
   </view>
 
+  <!-- 出牌提示 -->
+  <view class="action-hint" wx:if="{{isMyTurn && gameStage < 5}}">
+    <view class="hint-content">
+      <text class="hint-icon">🎯</text>
+      <text class="hint-text">轮到你出牌</text>
+    </view>
+    <view class="hint-actions">
+      <text class="hint-item" wx:if="{{canCheck}}">💡 可以过牌</text>
+      <text class="hint-item" wx:else>💰 跟注 {{toCall || 0}}</text>
+      <text class="hint-item">🎲 或加注</text>
+    </view>
+  </view>
+
   <!-- 结算弹窗 -->
   <view class="result-modal" wx:if="{{showResult}}">
     <view class="result-content">
