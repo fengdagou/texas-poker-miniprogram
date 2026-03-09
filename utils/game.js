@@ -393,7 +393,7 @@ class GameState {
   }
 
   getState(currentViewPlayerId = null) {
-    return {
+    const state = {
       roomId: this.roomId,
       stage: this.stage,
       pot: this.pot,
@@ -404,6 +404,7 @@ class GameState {
       players: this.players.map(p => {
         // 每个玩家只能看到自己的手牌
         const revealHand = currentViewPlayerId ? (p.id === currentViewPlayerId || this.stage >= GAME_STAGE.SHOWDOWN) : false
+        console.log(`[getState] 玩家 ${p.name}, stage=${this.stage}, revealHand=${revealHand}, hand=${revealHand ? p.hand.length : 0}张`)
         return p.toJSON(revealHand)
       }),
       winner: this.winner ? {
@@ -413,6 +414,8 @@ class GameState {
       } : null,
       blinds: this.blinds
     }
+    console.log('[getState] 阶段:', this.stage, 'SHOWDOWN=', GAME_STAGE.SHOWDOWN, 'FINISHED=', GAME_STAGE.FINISHED)
+    return state
   }
 }
 
