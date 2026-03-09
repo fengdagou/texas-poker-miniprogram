@@ -126,14 +126,16 @@ Page({
   },
 
   startGame() {
+    console.log('=================================')
     console.log('=== 开始游戏 ===')
+    console.log('=================================')
     
     // 显示荷官发牌动画
     this.showDealingAnimation()
     
     const result = this.data.game.startGame()
     if (result.success) {
-      console.log('游戏启动成功')
+      console.log('✅ 游戏启动成功')
       console.log('庄家索引:', this.data.game.dealerIndex)
       console.log('当前玩家索引:', this.data.game.currentPlayerIndex)
       console.log('玩家列表:', this.data.game.players.map(p => ({ 
@@ -142,13 +144,15 @@ Page({
         isBot: p.isBot,
         chips: p.chips 
       })))
+      console.log('我的索引:', this.data.myIndex)
       
       // 立即更新一次界面，显示盲注
+      console.log('📞 第一次调用 updateGameState')
       this.updateGameState()
       
       // 发牌动画结束后再更新一次（显示手牌）
       setTimeout(() => {
-        console.log('发牌动画结束，刷新游戏状态')
+        console.log('📞 发牌动画结束，第二次调用 updateGameState')
         this.updateGameState()
       }, 2500)
     } else {
@@ -322,18 +326,32 @@ Page({
     }
 
     // 机器人自动操作
+    console.log('检查是否需要机器人操作:', {
+      isMyTurn,
+      stage: state.stage,
+      currentPlayerIndex,
+      stageLimit: GAME_STAGE.SHOWDOWN
+    })
+    
     if (!isMyTurn && state.stage < GAME_STAGE.SHOWDOWN) {
       const currentPlayer = state.players[currentPlayerIndex]
-      console.log('检查机器人操作:', { 
-        isMyTurn, 
-        stage: state.stage, 
-        currentPlayer: currentPlayer ? currentPlayer.name : 'null',
-        isBot: currentPlayer ? currentPlayer.isBot : false 
+      console.log('当前玩家信息:', { 
+        name: currentPlayer ? currentPlayer.name : 'null',
+        isBot: currentPlayer ? currentPlayer.isBot : false,
+        isFolded: currentPlayer ? currentPlayer.isFolded : false
       })
-      if (currentPlayer && currentPlayer.isBot) {
-        console.log('触发机器人操作:', currentPlayer.name)
-        setTimeout(() => this.botAction(currentPlayer), 1000)
+      
+      if (currentPlayer && currentPlayer.isBot && !currentPlayer.isFolded) {
+        console.log('✅ 触发机器人操作:', currentPlayer.name)
+        setTimeout(() => {
+          console.log('执行机器人操作:', currentPlayer.name)
+          this.botAction(currentPlayer)
+        }, 1000)
+      } else {
+        console.log('❌ 不触发机器人操作')
       }
+    } else {
+      console.log('不满足机器人操作条件:', { isMyTurn, stage: state.stage })
     }
   },
 
