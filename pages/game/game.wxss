@@ -510,34 +510,45 @@
   z-index: 2;
 }
 
-/* 花色颜色 - 古典风格 */
-/* 黑色花色 */
-.card.spades,
-.card.spades .card-rank,
-.card.clubs,
-.card.clubs .card-rank {
-  color: black !important;
-  text-shadow: none !important;
+/* ========== 花色颜色 - 最高优先级 ========== */
+/* 红色花色：红桃♥ 方块♦ */
+.card.hearts {
+  color: #dc143c !important;
 }
-
-/* 红色花色 */
-.card.hearts,
-.card.hearts .card-rank,
-.card.diamonds,
+.card.hearts .card-rank {
+  color: #dc143c !important;
+}
+.card.diamonds {
+  color: #dc143c !important;
+}
 .card.diamonds .card-rank {
-  color: red !important;
-  text-shadow: none !important;
+  color: #dc143c !important;
 }
-
-/* 确保 card-rank 本身也有颜色 */
+text.hearts,
+text.diamonds,
 .card-rank.hearts,
 .card-rank.diamonds {
-  color: red !important;
+  color: #dc143c !important;
 }
 
+/* 黑色花色：黑桃♠ 梅花♣ */
+.card.spades {
+  color: #000000 !important;
+}
+.card.spades .card-rank {
+  color: #000000 !important;
+}
+.card.clubs {
+  color: #000000 !important;
+}
+.card.clubs .card-rank {
+  color: #000000 !important;
+}
+text.spades,
+text.clubs,
 .card-rank.spades,
 .card-rank.clubs {
-  color: black !important;
+  color: #000000 !important;
 }
 
 .stage-label {
@@ -555,91 +566,92 @@
 }
 
 /* ========== 我的手牌区域 ========== */
+/* ========== 我的手牌区域 - 提高位置 ========== */
 .my-area {
   position: fixed;
-  bottom: 0;
+  bottom: 280rpx;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(26, 15, 10, 0.95) 0%, rgba(44, 24, 16, 0.7) 70%, transparent 100%);
-  padding: 20rpx;
-  padding-bottom: 200rpx;
+  background: transparent;
+  padding: 15rpx;
   z-index: 50;
-  border-top: 2rpx solid rgba(212, 175, 55, 0.2);
+  pointer-events: none;
 }
 
 .my-cards {
   display: flex;
-  gap: 15rpx;
+  gap: 12rpx;
   justify-content: center;
-  margin-bottom: 15rpx;
+  margin-bottom: 0;
 }
 
 .my-cards .card {
-  width: 80rpx;
-  height: 115rpx;
-  font-size: 40rpx;
+  width: 75rpx;
+  height: 110rpx;
+  font-size: 38rpx;
   box-shadow: 
-    0 6rpx 20rpx rgba(0, 0, 0, 0.5),
+    0 6rpx 20rpx rgba(0, 0, 0, 0.6),
     inset 0 2rpx 10rpx rgba(255, 255, 255, 0.6);
+  background: linear-gradient(135deg, #f5f5dc 0%, #e8e4c9 100%);
+  border-radius: 10rpx;
+  border: 2rpx solid rgba(139, 69, 19, 0.4);
 }
 
-/* ========== 操作按钮区域 ========== */
+/* ========== 操作按钮区域 - 紧凑设计 ========== */
 .action-area {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg, rgba(26, 15, 10, 0.9) 0%, rgba(44, 24, 16, 0.95) 100%);
-  padding: 15rpx;
-  padding-bottom: 25rpx;
+  background: linear-gradient(180deg, rgba(44, 24, 16, 0.95) 0%, rgba(26, 15, 10, 0.98) 100%);
+  padding: 12rpx 15rpx;
+  padding-bottom: 20rpx;
   z-index: 100;
-  border-top: 2rpx solid rgba(212, 175, 55, 0.3);
-  box-shadow: 0 -5rpx 30rpx rgba(0, 0, 0, 0.5);
+  border-top: 2rpx solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 -5rpx 25rpx rgba(0, 0, 0, 0.5);
+  max-height: 260rpx;
 }
 
 .bet-slider {
   display: flex;
   align-items: center;
-  gap: 15rpx;
-  margin-bottom: 15rpx;
-  padding: 0 15rpx;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+  padding: 0 10rpx;
 }
 
 .bet-slider slider {
   flex: 1;
-  height: 40rpx;
+  height: 36rpx;
 }
 
 .bet-amount {
   color: #ffd700;
-  font-size: 28rpx;
+  font-size: 26rpx;
   font-weight: bold;
-  min-width: 80rpx;
+  min-width: 70rpx;
   text-align: right;
   text-shadow: 0 2rpx 8rpx rgba(255, 215, 0, 0.4);
-  font-family: 'Georgia', serif;
 }
 
-/* 快捷下注按钮 - 古典风格 */
+/* 快捷下注按钮 - 紧凑设计 */
 .bet-presets {
   display: flex;
-  gap: 10rpx;
+  gap: 8rpx;
   justify-content: center;
-  margin-bottom: 15rpx;
-  padding: 0 15rpx;
+  margin-bottom: 12rpx;
+  padding: 0 10rpx;
 }
 
 .bet-preset-btn {
-  padding: 10rpx 20rpx;
-  border-radius: 12rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 10rpx;
   background: linear-gradient(135deg, rgba(62, 39, 25, 0.8) 0%, rgba(44, 24, 16, 0.9) 100%);
   border: 2rpx solid rgba(212, 175, 55, 0.4);
   color: #d4af37;
-  font-size: 22rpx;
+  font-size: 20rpx;
   font-weight: bold;
-  box-shadow: 
-    0 3rpx 10rpx rgba(0, 0, 0, 0.4),
-    inset 0 2rpx 8rpx rgba(212, 175, 55, 0.1);
+  box-shadow: 0 3rpx 8rpx rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
 }
 
@@ -657,22 +669,20 @@
 .action-buttons {
   display: flex;
   flex-direction: row;
-  gap: 10rpx;
+  gap: 8rpx;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
 
 .action-buttons button {
-  padding: 14rpx 20rpx;
-  border-radius: 14rpx;
-  font-size: 22rpx;
+  padding: 12rpx 16rpx;
+  border-radius: 12rpx;
+  font-size: 20rpx;
   font-weight: bold;
   border: none;
   white-space: nowrap;
-  box-shadow: 
-    0 4rpx 15rpx rgba(0, 0, 0, 0.4),
-    inset 0 2rpx 8rpx rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;

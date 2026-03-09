@@ -65,7 +65,7 @@
         wx:key="index"
         wx:for-item="card"
       >
-        <text wx:if="{{card}}" class="card-rank">{{card.rank}}{{card.suit}}</text>
+        <text wx:if="{{card}}" class="card-rank {{getSuitClass(card.suit)}}">{{card.rank}}{{card.suit}}</text>
       </view>
       <view class="card empty" wx:if="{{communityCards.length < 5}}"></view>
       <view class="card empty" wx:if="{{communityCards.length < 4}}"></view>
@@ -78,7 +78,7 @@
   <view class="my-area">
     <view class="my-cards">
       <view class="card {{getSuitClass(card.suit)}}" wx:for="{{myHand}}" wx:key="*this" wx:for-item="card">
-        <text class="card-rank">{{card.rank}}{{card.suit}}</text>
+        <text class="card-rank {{getSuitClass(card.suit)}}">{{card.rank}}{{card.suit}}</text>
       </view>
     </view>
   </view>

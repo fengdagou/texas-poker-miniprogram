@@ -1,0 +1,28 @@
+/* app.wxss - 古典风格字体与变量 */
+
+/* 全局古典风格变量 */
+page {
+  --color-wood-dark: #2c1810;
+  --color-wood-light: #3d2317;
+  --color-gold-primary: #d4af37;
+  --color-gold-bright: #ffd700;
+  --color-gold-muted: #b89628;
+  --color-red-accent: #c41e3a;
+  --color-black-deep: #1a0f0a;
+  --color-red-suit: #dc143c;
+  --color-black-suit: #2c1810;
+}
+
+/* 古典风格字体 */
+.container {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* 花色颜色 - 全局定义 */
+.suit-red {
+  color: #dc143c !important;
+}
+
+.suit-black {
+  color: #2c1810 !important;
+}
