@@ -636,11 +636,11 @@ text.suit-black,
   right: 0;
   background: linear-gradient(180deg, rgba(44, 24, 16, 0.95) 0%, rgba(26, 15, 10, 0.98) 100%);
   padding: 15rpx 15rpx;
-  padding-bottom: 30rpx;
+  padding-bottom: 35rpx;
   z-index: 100;
   border-top: 2rpx solid rgba(212, 175, 55, 0.4);
   box-shadow: 0 -5rpx 25rpx rgba(0, 0, 0, 0.5);
-  max-height: 320rpx;
+  max-height: 380rpx;
 }
 
 .bet-slider {
@@ -700,19 +700,20 @@ text.suit-black,
 /* 操作按钮 - 古典风格 */
 .action-buttons {
   display: flex;
-  flex-direction: row;
-  gap: 8rpx;
+  flex-direction: column;
+  gap: 10rpx;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .action-buttons button {
-  padding: 18rpx 28rpx;
+  padding: 16rpx 0;
   border-radius: 14rpx;
   font-size: 24rpx;
   font-weight: bold;
   border: none;
+  width: 90%;
+  max-width: 500rpx;
   white-space: nowrap;
   box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
