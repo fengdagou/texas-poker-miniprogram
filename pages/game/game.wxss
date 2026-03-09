@@ -600,7 +600,7 @@ text.suit-black,
 /* ========== 我的手牌区域 - 上移到合适位置 ========== */
 .my-area {
   position: fixed;
-  bottom: 340rpx;
+  bottom: 300rpx;
   left: 0;
   right: 0;
   background: transparent;
@@ -640,7 +640,7 @@ text.suit-black,
   z-index: 100;
   border-top: 2rpx solid rgba(212, 175, 55, 0.4);
   box-shadow: 0 -5rpx 25rpx rgba(0, 0, 0, 0.5);
-  max-height: 280rpx;
+  max-height: 260rpx;
 }
 
 .bet-slider {
