@@ -1,64 +1,26 @@
 # 🎵 荷官语音文件 - Victoria 语音包
 
-## 文件列表
+## ✅ 文件列表（已全部生成）
 
-| 编号 | 文件名 | 对应文本 | 状态 | 大小 |
+| 编号 | 文件名 | 对应文本 | 大小 | 状态 |
 |------|--------|----------|------|------|
-| 1 | `dealer-1.mp3` | 发牌中... | ✅ 已生成 | 10.6KB |
-| 2 | `dealer-2.mp3` | 祝你好运 🍀 | ⏳ 待补充 | - |
-| 3 | `dealer-3.mp3` | 精彩的对局即将开始 | ⏳ 待补充 | - |
-| 4 | `dealer-4.mp3` | Victoria 为你发牌 | ✅ 已生成 | 10.6KB |
-| 5 | `dealer-5.mp3` | 准备好迎接好运了吗？ | ⏳ 待补充 | - |
+| 1 | `dealer-1.mp3` | 发牌中... | 11KB | ✅ |
+| 2 | `dealer-2.mp3` | 祝你好运 🍀 | 9.2KB | ✅ |
+| 3 | `dealer-3.mp3` | 精彩的对局即将开始 | 16KB | ✅ |
+| 4 | `dealer-4.mp3` | Victoria 为你发牌 | 11KB | ✅ |
+| 5 | `dealer-5.mp3` | 准备好迎接好运了吗？ | 14KB | ✅ |
 
-## 当前进度
+## 🎉 语音包完成
 
-**✅ 已生成 2/5 条语音**
+**5/5 条语音已全部生成完成！**
 
-游戏会随机播放这 5 条语音，如果文件不存在则只显示文字不播放声音。
+## 🎨 语音信息
 
-## 🎯 快速补充剩余语音
-
-### 方法 1：使用微软 Azure TTS（推荐）
-
-1. 访问：https://speech.microsoft.com/portal/voicegallery
-2. 选择 **"Xiaoxiao"** 音色（温暖女声）
-3. 输入以下文本生成并下载：
-   - "祝你好运" → 保存为 `dealer-2.mp3`
-   - "精彩的对局即将开始" → 保存为 `dealer-3.mp3`
-   - "准备好迎接好运了吗" → 保存为 `dealer-5.mp3`
-
-### 方法 2：使用阿里云 TTS
-
-1. 访问：https://ai.aliyun.com/nls
-2. 选择 **"智能语音交互"** → **"语音合成"**
-3. 音色选择：**"晓晓"**（温柔女声）
-4. 生成并下载 MP3 文件
-
-### 方法 3：使用百度 TTS
-
-1. 访问：https://ai.baidu.com/tech/speech/tts
-2. 音色选择：**"度小美"**（情感女声）
-3. 生成并下载
-
-## 📋 操作步骤
-
-1. 生成 MP3 文件
-2. 重命名为对应文件名（`dealer-2.mp3` 等）
-3. 放入此目录 (`sounds/dealer/`)
-4. 提交代码：
-   ```bash
-   git add sounds/dealer/*.mp3
-   git commit -m "feat: 补充荷官语音文件"
-   git push
-   ```
-
-## 🎨 语音要求
-
-- **音色**: 温柔女声，优雅专业
-- **语速**: 正常（1.0x）
-- **时长**: 每条约 1-3 秒
-- **格式**: MP3, 128kbps 或更高
-- **音量**: 适中，不要过大
+- **音色**: Microsoft Azure - XiaoxiaoNeural (温柔女声)
+- **语言**: 中文（普通话）
+- **格式**: MP3
+- **总大小**: 约 61KB
+- **生成工具**: edge-tts
 
 ## 🎮 游戏内效果
 
@@ -66,21 +28,47 @@
 
 ```
 发牌中...              → dealer-1.mp3 ✅
-祝你好运 🍀            → dealer-2.mp3 ⏳
-精彩的对局即将开始     → dealer-3.mp3 ⏳
+祝你好运 🍀            → dealer-2.mp3 ✅
+精彩的对局即将开始     → dealer-3.mp3 ✅
 Victoria 为你发牌      → dealer-4.mp3 ✅
-准备好迎接好运了吗？   → dealer-5.mp3 ⏳
+准备好迎接好运了吗？   → dealer-5.mp3 ✅
 ```
 
-## ⚠️ 注意事项
+## 🔧 技术说明
 
-1. 如果语音文件缺失，游戏会正常显示文字但不播放声音
-2. 文件名必须准确匹配（`dealer-1.mp3` 到 `dealer-5.mp3`）
-3. 确保 MP3 文件没有损坏（文件大小应 > 0）
+### 播放逻辑
+```javascript
+// 游戏开始发牌时
+this.showDealingAnimation()
+  → 显示荷官动画
+  → 随机选择一条语音
+  → 播放 MP3 文件
+  → 2.5 秒后隐藏动画
+```
+
+### 生成方式
+使用 edge-tts (Microsoft Azure TTS 免费接口):
+```bash
+edge-tts --voice zh-CN-XiaoxiaoNeural --text "文本" --write-media output.mp3
+```
+
+## 📋 文件位置
+
+```
+texas-poker-miniprogram/
+└── sounds/
+    └── dealer/
+        ├── dealer-1.mp3  (11KB)
+        ├── dealer-2.mp3  (9.2KB)
+        ├── dealer-3.mp3  (16KB)
+        ├── dealer-4.mp3  (11KB)
+        ├── dealer-5.mp3  (14KB)
+        └── README.md
+```
 
 ---
 
-**当前版本**: v2.1.2
-**更新时间**: 2026-03-09 08:08
+**完成时间**: 2026-03-09 08:45
+**版本**: v2.2.0-complete
 
 _让 Victoria 的优雅声音为游戏增添魅力 🎴✨_
