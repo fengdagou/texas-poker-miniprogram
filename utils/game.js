@@ -264,17 +264,20 @@ class GameState {
   }
 
   nextPlayer() {
-    // 检查是否只剩一个玩家
-    const activePlayers = this.players.filter(p => !p.isFolded && !p.isAllIn)
-    if (activePlayers.length === 0) {
-      // 所有玩家都 All-in 或弃牌，摊牌
-      this.goToShowdown()
+    // 检查是否只剩一个玩家（其他人都弃牌）
+    const notFoldedPlayers = this.players.filter(p => !p.isFolded)
+    if (notFoldedPlayers.length === 1) {
+      // 其他人都弃牌，获胜
+      this.handleWinner(notFoldedPlayers[0])
       return
     }
-
-    if (activePlayers.length === 1) {
-      // 其他人都弃牌，获胜
-      this.handleWinner(activePlayers[0])
+    
+    // 检查是否所有未弃牌的玩家都 ALL IN 了
+    const allInOrFolded = this.players.every(p => p.isFolded || p.isAllIn)
+    if (allInOrFolded) {
+      // 所有玩家都 All-in 或弃牌，直接摊牌
+      console.log('所有玩家都 ALL IN 或弃牌，进入摊牌')
+      this.goToShowdown()
       return
     }
 

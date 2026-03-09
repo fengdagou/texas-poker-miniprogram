@@ -341,7 +341,18 @@ Page({
 
     // 检查游戏是否结束
     if (state.stage === GAME_STAGE.FINISHED && state.winner) {
+      console.log('游戏结束，显示结算')
       this.showResult(state.winner)
+      return
+    }
+
+    // 检查是否所有玩家都已 ALL IN 或弃牌，只剩一个活跃玩家
+    const activePlayers = game.players.filter(p => !p.isFolded && !p.isAllIn)
+    const allInPlayers = game.players.filter(p => p.isAllIn && !p.isFolded)
+    console.log('活跃玩家:', activePlayers.length, 'ALL IN 玩家:', allInPlayers.length)
+    
+    if (activePlayers.length === 0 && allInPlayers.length > 1) {
+      console.log('所有玩家都 ALL IN，应该摊牌')
     }
 
     // 机器人自动操作 - 使用 game.players 而不是 state.players
