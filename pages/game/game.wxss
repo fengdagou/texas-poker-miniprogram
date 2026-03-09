@@ -597,10 +597,10 @@ text.suit-black,
 }
 
 /* ========== 我的手牌区域 ========== */
-/* ========== 我的手牌区域 - 上移 ========== */
+/* ========== 我的手牌区域 - 上移确保可见 ========== */
 .my-area {
   position: fixed;
-  bottom: 320rpx;
+  bottom: 380rpx;
   left: 0;
   right: 0;
   background: transparent;
@@ -611,15 +611,15 @@ text.suit-black,
 
 .my-cards {
   display: flex;
-  gap: 12rpx;
+  gap: 15rpx;
   justify-content: center;
   margin-bottom: 0;
 }
 
 .my-cards .card {
-  width: 75rpx;
-  height: 110rpx;
-  font-size: 38rpx;
+  width: 80rpx;
+  height: 115rpx;
+  font-size: 40rpx;
   box-shadow: 
     0 6rpx 20rpx rgba(0, 0, 0, 0.6),
     inset 0 2rpx 10rpx rgba(255, 255, 255, 0.6);
@@ -628,7 +628,7 @@ text.suit-black,
   border: 2rpx solid rgba(139, 69, 19, 0.4);
 }
 
-/* ========== 操作按钮区域 - 放大按钮 ========== */
+/* ========== 操作按钮区域 - 高度增加 ========== */
 .action-area {
   position: fixed;
   bottom: 0;
@@ -640,7 +640,7 @@ text.suit-black,
   z-index: 100;
   border-top: 2rpx solid rgba(212, 175, 55, 0.4);
   box-shadow: 0 -5rpx 25rpx rgba(0, 0, 0, 0.5);
-  max-height: 380rpx;
+  max-height: 420rpx;
 }
 
 .bet-slider {
