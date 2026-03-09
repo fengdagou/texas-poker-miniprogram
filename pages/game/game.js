@@ -346,6 +346,32 @@ Page({
       return
     }
 
+    // 检查金币输光/赢光情况
+    const myPlayer = state.players[this.data.myIndex]
+    const botPlayers = state.players.filter(p => p.isBot)
+    const myChips = myPlayer ? myPlayer.chips : 0
+    const allBotsBankrupt = botPlayers.every(p => p.chips === 0)
+    
+    console.log('金币检查:', { 
+      myChips, 
+      allBotsBankrupt,
+      bots: botPlayers.map(p => ({ name: p.name, chips: p.chips }))
+    })
+    
+    // 玩家金币输光 → 游戏失败
+    if (myChips === 0 && state.stage >= GAME_STAGE.PREFLOP) {
+      console.log('玩家金币输光，游戏失败')
+      this.showBankruptResult(false)
+      return
+    }
+    
+    // 所有机器人金币输光 → 游戏胜利
+    if (allBotsBankrupt && state.stage >= GAME_STAGE.PREFLOP) {
+      console.log('所有机器人金币输光，游戏胜利')
+      this.showBankruptResult(true)
+      return
+    }
+
     // 检查是否所有玩家都已 ALL IN 或弃牌，只剩一个活跃玩家
     const activePlayers = game.players.filter(p => !p.isFolded && !p.isAllIn)
     const allInPlayers = game.players.filter(p => p.isAllIn && !p.isFolded)
@@ -495,6 +521,26 @@ Page({
       winnerText: isMyWin ? '🎉 你赢了！' : '😔 你输了',
       winnerHand: winner.hand ? { typeName: HAND_NAMES[winner.hand.type] } : null,
       winAmount: isMyWin ? winner.amount : 0,
+      allPlayers: allPlayers,
+      communityCards: state.communityCards || []
+    })
+  },
+
+  showBankruptResult(isWin) {
+    const state = this.data.game.getState(wx.getStorageSync('userId'))
+    
+    const allPlayers = state.players.map(p => ({
+      id: p.id,
+      name: p.name,
+      hand: p.hand || [],
+      isFolded: p.isFolded
+    }))
+    
+    this.setData({
+      showResult: true,
+      winnerText: isWin ? '🎉 你赢了所有筹码！' : '😔 你的金币已输光',
+      winnerHand: null,
+      winAmount: isWin ? this.data.pot : 0,
       allPlayers: allPlayers,
       communityCards: state.communityCards || []
     })
