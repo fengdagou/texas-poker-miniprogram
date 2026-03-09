@@ -509,10 +509,11 @@ Page({
     return ''
   },
 
-  // 获取花色颜色类（红色/黑色）
+  // 获取花色颜色类（红色/黑色）- 简化版
   getSuitColorClass(suit) {
     if (!suit) return ''
-    if (suit === '♥' || suit === '♦') return 'suit-red'
-    return 'suit-black'
+    // 红桃和方块返回 red-suit，其他返回 black-suit
+    if (suit === '♥' || suit === '♦') return 'red-suit'
+    return 'black-suit'
   }
 })

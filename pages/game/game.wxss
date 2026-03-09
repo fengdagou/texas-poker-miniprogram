@@ -1,5 +1,22 @@
 /* pages/game/game.wxss - 古典风格 */
 
+/* ========== 花色颜色 - 最简单直接的方式 ========== */
+/* 红色花色 */
+.red-suit {
+  color: #FF0000 !important;
+}
+.red-suit .card-rank {
+  color: #FF0000 !important;
+}
+
+/* 黑色花色 */
+.black-suit {
+  color: #000000 !important;
+}
+.black-suit .card-rank {
+  color: #000000 !important;
+}
+
 /* ========== 古典主题变量 ========== */
 .game-container {
   min-height: 100vh;
