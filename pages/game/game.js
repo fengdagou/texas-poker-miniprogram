@@ -154,6 +154,14 @@ Page({
       setTimeout(() => {
         console.log('📞 发牌动画结束，第二次调用 updateGameState')
         this.updateGameState()
+        
+        // 额外检查：如果当前是机器人回合，直接触发
+        const currentPlayer = this.data.game.players[this.data.game.currentPlayerIndex]
+        console.log('额外检查当前玩家:', currentPlayer ? currentPlayer.name : 'null', '是否机器人:', currentPlayer ? currentPlayer.isBot : false)
+        if (currentPlayer && currentPlayer.isBot) {
+          console.log('🤖 直接触发机器人操作')
+          this.botAction(currentPlayer)
+        }
       }, 2500)
     } else {
       console.error('游戏启动失败:', result.message)
@@ -325,18 +333,20 @@ Page({
       this.showResult(state.winner)
     }
 
-    // 机器人自动操作
-    console.log('检查是否需要机器人操作:', {
+    // 机器人自动操作 - 使用 game.players 而不是 state.players
+    console.log('🤖 检查机器人操作条件:', {
       isMyTurn,
-      stage: state.stage,
-      currentPlayerIndex,
-      stageLimit: GAME_STAGE.SHOWDOWN
+      stage: game.stage,
+      currentPlayerIndex: game.currentPlayerIndex,
+      showndownLimit: GAME_STAGE.SHOWDOWN
     })
     
-    if (!isMyTurn && state.stage < GAME_STAGE.SHOWDOWN) {
-      const currentPlayer = state.players[currentPlayerIndex]
-      console.log('当前玩家信息:', { 
+    if (!isMyTurn && game.stage < GAME_STAGE.SHOWDOWN) {
+      // 直接使用 game.players 获取当前玩家
+      const currentPlayer = game.players[game.currentPlayerIndex]
+      console.log('当前玩家:', { 
         name: currentPlayer ? currentPlayer.name : 'null',
+        id: currentPlayer ? currentPlayer.id : 'null',
         isBot: currentPlayer ? currentPlayer.isBot : false,
         isFolded: currentPlayer ? currentPlayer.isFolded : false
       })
@@ -344,14 +354,22 @@ Page({
       if (currentPlayer && currentPlayer.isBot && !currentPlayer.isFolded) {
         console.log('✅ 触发机器人操作:', currentPlayer.name)
         setTimeout(() => {
-          console.log('执行机器人操作:', currentPlayer.name)
+          console.log('🤖 执行机器人操作:', currentPlayer.name)
           this.botAction(currentPlayer)
-        }, 1000)
+        }, 500)
       } else {
-        console.log('❌ 不触发机器人操作')
+        console.log('❌ 不触发机器人操作，原因:', {
+          hasCurrentPlayer: !!currentPlayer,
+          isBot: currentPlayer ? currentPlayer.isBot : 'N/A',
+          isFolded: currentPlayer ? currentPlayer.isFolded : 'N/A'
+        })
       }
     } else {
-      console.log('不满足机器人操作条件:', { isMyTurn, stage: state.stage })
+      console.log('❌ 不满足机器人操作条件:', { 
+        isMyTurn, 
+        stage: game.stage,
+        stageLtShowdown: game.stage < GAME_STAGE.SHOWDOWN
+      })
     }
   },
 
