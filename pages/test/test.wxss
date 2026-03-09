@@ -1,0 +1,65 @@
+/* pages/test/test.wxss */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2c1810 0%, #1a0f0a 100%);
+  padding: 30rpx;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ffd700;
+  margin-bottom: 10rpx;
+}
+
+.desc {
+  font-size: 28rpx;
+  color: #d4af37;
+}
+
+.logs {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  max-height: 800rpx;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 24rpx;
+  border: 2rpx solid rgba(212, 175, 55, 0.3);
+}
+
+.log {
+  color: #f0c850;
+  margin-bottom: 15rpx;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.buttons {
+  margin-top: 30rpx;
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-copy,
+.btn-rerun {
+  flex: 1;
+  padding: 25rpx;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border: 2rpx solid rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, rgba(62, 39, 25, 0.8) 0%, rgba(44, 24, 16, 0.9) 100%);
+  color: #ffd700;
+}
+
+.btn-copy:active,
+.btn-rerun:active {
+  transform: scale(0.95);
+}

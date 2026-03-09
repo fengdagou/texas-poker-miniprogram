@@ -67,10 +67,16 @@ Page({
   initGame() {
     const roomId = this.data.roomId || app.generateRoomId()
     const myId = wx.getStorageSync('userId') || 'user_001'
-    const myName = '玩家' + myId.substr(-4)
+    const myName = wx.getStorageSync('nickName') || '玩家'
     const myCoins = app.getCoins() || 10000
 
-    console.log('初始化游戏:', { roomId, myId, myName, myCoins })
+    console.log('初始化游戏:', { 
+      roomId, 
+      myId, 
+      myName, 
+      myCoins,
+      userIdExists: !!wx.getStorageSync('userId')
+    })
 
     // 创建游戏状态
     const game = new GameState(roomId, myId, { small: 10, big: 20 })
@@ -88,7 +94,10 @@ Page({
 
     // 找到我的索引
     const myIndex = game.players.findIndex(p => p.id === myId)
-    console.log('我的索引:', myIndex, '玩家列表:', game.players.map(p => p.id))
+    console.log('我的索引:', myIndex)
+    console.log('玩家列表:', game.players.map(p => ({ id: p.id, name: p.name, isBot: p.isBot })))
+    console.log('庄家索引:', game.dealerIndex)
+    console.log('当前玩家索引:', game.currentPlayerIndex)
 
     // 初始化界面
     this.setData({
@@ -234,23 +243,33 @@ Page({
     const game = this.data.game
     const myId = wx.getStorageSync('userId') || 'user_001'
     
+    console.log('=================================')
     console.log('=== 开始更新游戏状态 ===')
+    console.log('=================================')
     console.log('我的 ID:', myId)
     console.log('我的索引:', this.data.myIndex)
     console.log('玩家总数:', game.players.length)
+    console.log('游戏阶段:', game.stage)
+    console.log('当前玩家索引:', game.currentPlayerIndex)
     
     // 获取游戏状态（传入我的 ID，让我能看到自己的手牌）
     const state = game.getState(myId)
     
     console.log('状态中的玩家数:', state.players.length)
-    console.log('状态中的所有玩家:', state.players.map(p => ({ id: p.id, name: p.name, hand: p.hand })))
+    console.log('当前玩家索引 (state):', state.currentPlayerIndex)
+    console.log('状态中的所有玩家:', state.players.map(p => ({ 
+      id: p.id, 
+      name: p.name, 
+      isBot: p.isBot,
+      isFolded: p.isFolded,
+      chips: p.chips 
+    })))
     
     const myPlayer = state.players[this.data.myIndex]
     
     console.log('我的玩家对象:', myPlayer)
     console.log('我的手牌:', myPlayer ? myPlayer.hand : 'myPlayer 是 undefined')
     console.log('我的手牌数量:', myPlayer && myPlayer.hand ? myPlayer.hand.length : 0)
-    console.log('我的手牌详情:', JSON.stringify(myPlayer ? myPlayer.hand : null))
 
     const currentPlayerIndex = state.currentPlayerIndex
     const isMyTurn = currentPlayerIndex === this.data.myIndex && state.stage < GAME_STAGE.SHOWDOWN

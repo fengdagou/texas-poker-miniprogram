@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/game/game",
     "pages/room/room",
-    "pages/leaderboard/leaderboard"
+    "pages/leaderboard/leaderboard",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "dark",

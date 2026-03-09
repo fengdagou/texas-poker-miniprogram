@@ -1,0 +1,16 @@
+<!--pages/test/test.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="title">🔧 游戏调试</view>
+    <view class="desc">自动化测试日志</view>
+  </view>
+  
+  <view class="logs">
+    <view class="log" wx:for="{{logs}}" wx:key="*this">{{item}}</view>
+  </view>
+  
+  <view class="buttons">
+    <button class="btn-copy" bindtap="copyLogs">📋 复制日志</button>
+    <button class="btn-rerun" bindtap="runTests">🔄 重新测试</button>
+  </view>
+</view>
