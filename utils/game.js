@@ -253,28 +253,37 @@ class GameState {
     player.isAllIn = true
     player.lastAction = `全下 ${allInAmount}`
 
+    console.log(`[handleAllIn] ${player.name} 全下，更新前 currentBet=${this.currentBet}, player.currentBet=${player.currentBet}`)
+
     if (player.currentBet > this.currentBet) {
       this.currentBet = player.currentBet
       this.minRaise = allInAmount
     }
 
+    console.log(`[handleAllIn] 更新后 currentBet=${this.currentBet}`)
+
     return { success: true, action: ACTION.ALL_IN, amount: allInAmount }
   }
 
   nextPlayer() {
+    console.log('[nextPlayer] 开始，currentPlayerIndex=' + this.currentPlayerIndex + ', 当前玩家=' + this.players[this.currentPlayerIndex]?.name)
+    
     // 检查是否只剩一个玩家（其他人都弃牌）
     const notFoldedPlayers = this.players.filter(p => !p.isFolded)
+    console.log('[nextPlayer] notFoldedPlayers=' + notFoldedPlayers.length)
+    
     if (notFoldedPlayers.length === 1) {
-      // 其他人都弃牌，获胜
+      console.log('[nextPlayer] 只剩一个玩家，获胜')
       this.handleWinner(notFoldedPlayers[0])
       return
     }
     
     // 检查是否所有未弃牌的玩家都 ALL IN 了
     const allInOrFolded = this.players.every(p => p.isFolded || p.isAllIn)
+    console.log('[nextPlayer] allInOrFolded=' + allInOrFolded)
+    
     if (allInOrFolded) {
-      // 所有玩家都 All-in 或弃牌，继续发公共牌（而不是直接摊牌）
-      console.log('所有玩家都 ALL IN，继续发公共牌')
+      console.log('[nextPlayer] 所有玩家都 ALL IN，继续发公共牌')
       this.nextStage()
       return
     }
@@ -283,17 +292,23 @@ class GameState {
     const allCalled = this.players.every(p => 
       p.isFolded || p.isAllIn || p.currentBet === this.currentBet
     )
+    console.log('[nextPlayer] allCalled=' + allCalled + ', currentBet=' + this.currentBet)
+    console.log('[nextPlayer] 玩家下注:', this.players.map(p => p.name + ':' + p.currentBet + '(allIn=' + p.isAllIn + ')').join(', '))
 
     if (allCalled) {
+      console.log('[nextPlayer] 一轮结束，进入下一阶段')
       this.nextStage()
     } else {
       // 下一个玩家
+      console.log('[nextPlayer] 寻找下一个玩家...')
       do {
         this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length
+        console.log('[nextPlayer] 检查索引=' + this.currentPlayerIndex + ', 玩家=' + this.players[this.currentPlayerIndex]?.name + ', isFolded=' + this.players[this.currentPlayerIndex]?.isFolded + ', isAllIn=' + this.players[this.currentPlayerIndex]?.isAllIn)
       } while (
         this.players[this.currentPlayerIndex].isFolded || 
         this.players[this.currentPlayerIndex].isAllIn
       )
+      console.log('[nextPlayer] 找到下一个玩家：' + this.players[this.currentPlayerIndex]?.name)
     }
   }
 
