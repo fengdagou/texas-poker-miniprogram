@@ -68,7 +68,7 @@ Page({
     const roomId = this.data.roomId || app.generateRoomId()
     const myId = wx.getStorageSync('userId') || 'user_001'
     const myName = wx.getStorageSync('nickName') || '玩家'
-    const myCoins = app.getCoins() || 10000
+    let myCoins = app.getCoins() || 10000
 
     console.log('初始化游戏:', { 
       roomId, 
@@ -77,6 +77,14 @@ Page({
       myCoins,
       userIdExists: !!wx.getStorageSync('userId')
     })
+
+    // 检查金币是否为 0，如果是则自动赠送 1000 金币
+    if (myCoins <= 0) {
+      console.log('金币不足，自动赠送 1000 金币')
+      myCoins = 1000
+      wx.setStorageSync('coins', myCoins)
+      wx.showToast({ title: '赠送 1000 金币 🎁', icon: 'none', duration: 2000 })
+    }
 
     // 创建游戏状态
     const game = new GameState(roomId, myId, { small: 10, big: 20 })

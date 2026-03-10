@@ -114,12 +114,10 @@ class GameState {
     // 移动庄家位置
     this.dealerIndex = (this.dealerIndex + 1) % this.players.length
 
-    // 发手牌
+    // 发手牌（所有玩家都发牌，包括 All-in 的玩家）
     for (let i = 0; i < 2; i++) {
       for (let player of this.players) {
-        if (!player.isAllIn) {
-          player.hand.push(this.deck.deal())
-        }
+        player.hand.push(this.deck.deal())
       }
     }
 
