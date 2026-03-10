@@ -513,17 +513,16 @@ Page({
     const myId = wx.getStorageSync('userId') || 'user_001'
     const isMyWin = winner.players.some(p => p.id === myId)
     
-    // 获取游戏状态（包括公共牌和所有玩家手牌）
-    const state = this.data.game.getState(myId)
-    
-    const allPlayers = state.players.map(p => ({
+    // 强制获取所有玩家手牌（直接从 game.players 获取，不依赖 getState 的 revealHand 逻辑）
+    const game = this.data.game
+    const allPlayers = game.players.map(p => ({
       id: p.id,
       name: p.name,
-      hand: p.hand || [],
+      hand: p.hand ? p.hand.map(c => c.toJSON()) : [],
       isFolded: p.isFolded
     }))
     
-    console.log('游戏结束，公共牌:', state.communityCards)
+    console.log('游戏结束，公共牌:', game.communityCards)
     console.log('游戏结束，所有玩家手牌:', allPlayers)
     
     this.setData({
@@ -532,19 +531,22 @@ Page({
       winnerHand: winner.hand ? { typeName: HAND_NAMES[winner.hand.type] } : null,
       winAmount: isMyWin ? winner.amount : 0,
       allPlayers: allPlayers,
-      communityCards: state.communityCards || []
+      communityCards: game.communityCards ? game.communityCards.map(c => c.toJSON()) : []
     })
   },
 
   showBankruptResult(isWin) {
-    const state = this.data.game.getState(wx.getStorageSync('userId'))
-    
-    const allPlayers = state.players.map(p => ({
+    // 强制获取所有玩家手牌（不管游戏阶段）
+    const game = this.data.game
+    const allPlayers = game.players.map(p => ({
       id: p.id,
       name: p.name,
-      hand: p.hand || [],
+      hand: p.hand ? p.hand.map(c => c.toJSON()) : [],
       isFolded: p.isFolded
     }))
+    
+    console.log('破产结算，所有玩家手牌:', allPlayers)
+    console.log('破产结算，公共牌:', game.communityCards)
     
     this.setData({
       showResult: true,
@@ -552,7 +554,7 @@ Page({
       winnerHand: null,
       winAmount: isWin ? this.data.pot : 0,
       allPlayers: allPlayers,
-      communityCards: state.communityCards || []
+      communityCards: game.communityCards ? game.communityCards.map(c => c.toJSON()) : []
     })
   },
 
