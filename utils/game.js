@@ -253,15 +253,11 @@ class GameState {
     player.isAllIn = true
     player.lastAction = `全下 ${allInAmount}`
 
-    console.log(`[handleAllIn] ${player.name} 全下 ${allInAmount}, player.currentBet=${player.currentBet}, this.currentBet 前=${this.currentBet}`)
-    
     if (player.currentBet > this.currentBet) {
       this.currentBet = player.currentBet
       this.minRaise = allInAmount
     }
 
-    console.log(`[handleAllIn] 更新后 this.currentBet=${this.currentBet}, this.minRaise=${this.minRaise}`)
-    
     return { success: true, action: ACTION.ALL_IN, amount: allInAmount }
   }
 
@@ -395,7 +391,7 @@ class GameState {
   }
 
   getState(currentViewPlayerId = null) {
-    const state = {
+    return {
       roomId: this.roomId,
       stage: this.stage,
       pot: this.pot,
@@ -406,7 +402,6 @@ class GameState {
       players: this.players.map(p => {
         // 每个玩家只能看到自己的手牌
         const revealHand = currentViewPlayerId ? (p.id === currentViewPlayerId || this.stage >= GAME_STAGE.SHOWDOWN) : false
-        console.log(`[getState] 玩家 ${p.name}, stage=${this.stage}, revealHand=${revealHand}, hand=${revealHand ? p.hand.length : 0}张`)
         return p.toJSON(revealHand)
       }),
       winner: this.winner ? {
@@ -416,8 +411,6 @@ class GameState {
       } : null,
       blinds: this.blinds
     }
-    console.log('[getState] 阶段:', this.stage, 'SHOWDOWN=', GAME_STAGE.SHOWDOWN, 'FINISHED=', GAME_STAGE.FINISHED)
-    return state
   }
 }
 
