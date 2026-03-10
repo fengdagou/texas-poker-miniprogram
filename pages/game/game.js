@@ -292,7 +292,8 @@ Page({
     console.log('我的手牌数量:', myPlayer && myPlayer.hand ? myPlayer.hand.length : 0)
 
     const currentPlayerIndex = state.currentPlayerIndex
-    const isMyTurn = currentPlayerIndex === this.data.myIndex && state.stage < GAME_STAGE.SHOWDOWN
+    // 检查是否轮到玩家（还要检查玩家是否已 All-in）
+    const isMyTurn = currentPlayerIndex === this.data.myIndex && state.stage < GAME_STAGE.SHOWDOWN && !myPlayer.isAllIn
 
     const toCall = (state.currentBet || 0) - (myPlayer.currentBet || 0)
     const canCheck = toCall === 0
@@ -392,24 +393,30 @@ Page({
     }
 
     // 机器人自动操作 - 使用 game.players 而不是 state.players
-    console.log('🤖 检查机器人操作条件:', {
+    const currentPlayerForBot = game.players[game.currentPlayerIndex]
+    console.log('🤖 检查机器人操作:', {
       isMyTurn,
+      myPlayerIsAllIn: myPlayer ? myPlayer.isAllIn : false,
       stage: game.stage,
       currentPlayerIndex: game.currentPlayerIndex,
-      showndownLimit: GAME_STAGE.SHOWDOWN
+      currentPlayer: currentPlayerForBot ? currentPlayerForBot.name : 'null',
+      currentPlayerIsBot: currentPlayerForBot ? currentPlayerForBot.isBot : false,
+      currentPlayerIsAllIn: currentPlayerForBot ? currentPlayerForBot.isAllIn : false
     })
     
     if (!isMyTurn && game.stage < GAME_STAGE.SHOWDOWN) {
       // 直接使用 game.players 获取当前玩家
       const currentPlayer = game.players[game.currentPlayerIndex]
-      console.log('当前玩家:', { 
+      console.log('当前玩家详情:', { 
         name: currentPlayer ? currentPlayer.name : 'null',
         id: currentPlayer ? currentPlayer.id : 'null',
         isBot: currentPlayer ? currentPlayer.isBot : false,
-        isFolded: currentPlayer ? currentPlayer.isFolded : false
+        isFolded: currentPlayer ? currentPlayer.isFolded : false,
+        isAllIn: currentPlayer ? currentPlayer.isAllIn : false,
+        chips: currentPlayer ? currentPlayer.chips : 0
       })
       
-      if (currentPlayer && currentPlayer.isBot && !currentPlayer.isFolded) {
+      if (currentPlayer && currentPlayer.isBot && !currentPlayer.isFolded && !currentPlayer.isAllIn) {
         console.log('✅ 触发机器人操作:', currentPlayer.name)
         setTimeout(() => {
           console.log('🤖 执行机器人操作:', currentPlayer.name)
@@ -419,7 +426,8 @@ Page({
         console.log('❌ 不触发机器人操作，原因:', {
           hasCurrentPlayer: !!currentPlayer,
           isBot: currentPlayer ? currentPlayer.isBot : 'N/A',
-          isFolded: currentPlayer ? currentPlayer.isFolded : 'N/A'
+          isFolded: currentPlayer ? currentPlayer.isFolded : 'N/A',
+          isAllIn: currentPlayer ? currentPlayer.isAllIn : 'N/A'
         })
       }
     } else {
@@ -489,7 +497,12 @@ Page({
   },
 
   allIn() {
-    this.data.game.playerAction(wx.getStorageSync('userId'), ACTION.ALL_IN)
+    const userId = wx.getStorageSync('userId')
+    console.log('玩家 All-in 开始')
+    const result = this.data.game.playerAction(userId, ACTION.ALL_IN)
+    console.log('玩家 All-in 结果:', result)
+    console.log('All-in 后当前玩家索引:', this.data.game.currentPlayerIndex)
+    console.log('All-in 后当前玩家:', this.data.game.players[this.data.game.currentPlayerIndex])
     this.updateGameState()
   },
 
