@@ -266,7 +266,8 @@ class GameState {
   }
 
   nextPlayer() {
-    console.log('[nextPlayer] 开始，currentPlayerIndex=' + this.currentPlayerIndex + ', 当前玩家=' + this.players[this.currentPlayerIndex]?.name)
+    const currentPlayer = this.players[this.currentPlayerIndex]
+    console.log('[nextPlayer] 开始，currentPlayerIndex=' + this.currentPlayerIndex + ', 当前玩家=' + (currentPlayer ? currentPlayer.name : 'null'))
     
     // 检查是否只剩一个玩家（其他人都弃牌）
     const notFoldedPlayers = this.players.filter(p => !p.isFolded)
@@ -303,12 +304,14 @@ class GameState {
       console.log('[nextPlayer] 寻找下一个玩家...')
       do {
         this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length
-        console.log('[nextPlayer] 检查索引=' + this.currentPlayerIndex + ', 玩家=' + this.players[this.currentPlayerIndex]?.name + ', isFolded=' + this.players[this.currentPlayerIndex]?.isFolded + ', isAllIn=' + this.players[this.currentPlayerIndex]?.isAllIn)
+        const nextPlayer = this.players[this.currentPlayerIndex]
+        console.log('[nextPlayer] 检查索引=' + this.currentPlayerIndex + ', 玩家=' + (nextPlayer ? nextPlayer.name : 'null') + ', isFolded=' + (nextPlayer ? nextPlayer.isFolded : 'null') + ', isAllIn=' + (nextPlayer ? nextPlayer.isAllIn : 'null'))
       } while (
         this.players[this.currentPlayerIndex].isFolded || 
         this.players[this.currentPlayerIndex].isAllIn
       )
-      console.log('[nextPlayer] 找到下一个玩家：' + this.players[this.currentPlayerIndex]?.name)
+      const finalPlayer = this.players[this.currentPlayerIndex]
+      console.log('[nextPlayer] 找到下一个玩家：' + (finalPlayer ? finalPlayer.name : 'null'))
     }
   }
 
