@@ -316,6 +316,8 @@ class GameState {
   }
 
   nextStage() {
+    console.log('[nextStage] 开始，当前阶段=' + this.stage)
+    
     // 重置当前下注
     for (let player of this.players) {
       player.currentBet = 0
@@ -323,33 +325,46 @@ class GameState {
     this.currentBet = 0
     this.minRaise = this.blinds.big
 
-    // 找到第一个活跃玩家
+    // 找到第一个未弃牌的玩家（All-in 玩家也包括在内，因为还要继续发牌）
     this.currentPlayerIndex = (this.dealerIndex + 1) % this.players.length
+    let searchCount = 0
     while (
-      this.players[this.currentPlayerIndex].isFolded || 
-      this.players[this.currentPlayerIndex].isAllIn
+      this.players[this.currentPlayerIndex].isFolded &&
+      searchCount < this.players.length
     ) {
       this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length
+      searchCount++
     }
+    
+    console.log('[nextStage] 找到当前玩家索引=' + this.currentPlayerIndex + ', 玩家=' + (this.players[this.currentPlayerIndex] ? this.players[this.currentPlayerIndex].name : 'null'))
 
     switch (this.stage) {
       case GAME_STAGE.PREFLOP:
         this.stage = GAME_STAGE.FLOP
         this.communityCards.push(...this.deck.dealCards(3))
+        console.log('[nextStage] 发翻牌 3 张')
         break
       case GAME_STAGE.FLOP:
         this.stage = GAME_STAGE.TURN
         this.communityCards.push(...this.deck.dealCards(1))
+        console.log('[nextStage] 发转牌 1 张')
         break
       case GAME_STAGE.TURN:
         this.stage = GAME_STAGE.RIVER
         this.communityCards.push(...this.deck.dealCards(1))
+        console.log('[nextStage] 发河牌 1 张')
         break
       case GAME_STAGE.RIVER:
         this.stage = GAME_STAGE.SHOWDOWN
+        console.log('[nextStage] 进入摊牌')
         this.goToShowdown()
-        break
+        return  // goToShowdown 会处理结束逻辑
     }
+    
+    console.log('[nextStage] 完成，新阶段=' + this.stage + ', 继续检查玩家状态')
+    
+    // 发完牌后，继续检查是否所有玩家都 All-in
+    this.nextPlayer()
   }
 
   goToShowdown() {
