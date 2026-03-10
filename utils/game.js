@@ -253,11 +253,15 @@ class GameState {
     player.isAllIn = true
     player.lastAction = `全下 ${allInAmount}`
 
+    console.log(`[handleAllIn] ${player.name} 全下 ${allInAmount}, player.currentBet=${player.currentBet}, this.currentBet 前=${this.currentBet}`)
+    
     if (player.currentBet > this.currentBet) {
       this.currentBet = player.currentBet
       this.minRaise = allInAmount
     }
 
+    console.log(`[handleAllIn] 更新后 this.currentBet=${this.currentBet}, this.minRaise=${this.minRaise}`)
+    
     return { success: true, action: ACTION.ALL_IN, amount: allInAmount }
   }
 

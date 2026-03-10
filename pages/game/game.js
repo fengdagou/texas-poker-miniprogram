@@ -436,11 +436,13 @@ Page({
     const state = game.getState()
     const toCall = state.currentBet - botPlayer.currentBet
 
-    console.log('机器人决策:', { 
+    console.log('🤖 机器人决策:', { 
       name: botPlayer.name, 
-      toCall, 
+      toCall,
+      stateCurrentBet: state.currentBet,
+      botCurrentBet: botPlayer.currentBet,
       chips: botPlayer.chips,
-      currentBet: botPlayer.currentBet 
+      gameCurrentBet: game.currentBet
     })
 
     let action = ACTION.CHECK
@@ -462,6 +464,8 @@ Page({
       }
     }
 
+    console.log('🤖 机器人选择:', action, amount ? `(${amount})` : '')
+    
     game.playerAction(botPlayer.id, action, amount)
     this.updateGameState()
   },
